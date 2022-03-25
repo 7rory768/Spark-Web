@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
-  declarations: [AppComponent, HeroesComponent, LoginComponent, HeroDetailComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule,
-    FormsModule,
+    // PrimeNG
+    CheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

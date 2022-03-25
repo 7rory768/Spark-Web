@@ -1,7 +1,4 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import WeatherForecast from './models/WeatherForecast.model';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
@@ -9,20 +6,10 @@ import { PrimeNGConfig } from 'primeng/api';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  public forecasts: WeatherForecast[] | undefined;
+export class AppComponent implements OnInit {
+  constructor(private primengConfig: PrimeNGConfig) {}
 
-  constructor(http: HttpClient, private primengConfig: PrimeNGConfig) {
-    primengConfig.ripple = true;
-
-    http
-      .get<WeatherForecast[]>(environment.apiUrl + 'weatherforecast')
-      .subscribe(
-        (result) => {
-          this.forecasts = result;
-          console.log('forecasts:', this.forecasts);
-        },
-        (error) => console.error(error)
-      );
+  ngOnInit() {
+    this.primengConfig.ripple = true;
   }
 }
