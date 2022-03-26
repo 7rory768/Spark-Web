@@ -1,3 +1,22 @@
-<nav></nav>
+<div class="card" *ngIf="showNav()">
+  <div class="flex w-100 h-4rem bg-primary border-round shadow-2">
+    <div
+      class="flex align-items-center justify-content-center w-8rem h-full bg-blue-500 font-bold text-white border-round p-2"
+    >
+      <img src="../assets/images/icon/sparkles-48.png" />
+    </div>
+    <div
+      class="flex align-items-center justify-content-center w-8rem h-full bg-blue-500 font-bold text-white border-round p-2"
+    >
+      <button pButton class="bold-1" type="button" label="Projects"></button>
+    </div>
+    <div
+      class="flex flex-grow-1 align-items-center justify-content-end w-8rem h-full bg-blue-500 font-bold text-white border-round p-2"
+    >
+      <p-avatar icon="pi pi-user"></p-avatar>
+      <div></div>
+    </div>
+  </div>
+</div>
 
 <router-outlet></router-outlet>

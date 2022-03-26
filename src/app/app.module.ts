@@ -33,9 +33,13 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DialogModule } from 'primeng/dialog';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ProjectComponent } from './pages/project/project.component';
+import { TasklistComponent } from './components/tasklist/tasklist.component';
+import { TaskpreviewComponent } from './components/taskpreview/taskpreview.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, ProjectComponent, TasklistComponent, TaskpreviewComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -68,6 +72,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     DialogModule,
     AvatarModule,
     AvatarGroupModule,
+    OverlayPanelModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
