@@ -1,12 +1,27 @@
-<div class="card h-full" style="margin-top: 2rem">
+<div class="card h-full">
   <div class="flex overflow-hidden flex-grow-1 flex-column h-full">
+    <div class="flex w-full align-content-center">
+      <h2 style="margin-right: 1rem">{{ project.name }}</h2>
+      <p-avatarGroup class="flex align-content-center">
+        <p-avatar label="RS" shape="circle" color="bg-blue-500"></p-avatar>
+        <p-avatar label="R" shape="circle"></p-avatar>
+        <p-avatar label="L" shape="circle"></p-avatar>
+      </p-avatarGroup>
+      <button
+        pButton
+        class="flex align-self-center grayButton surface-300 border-300 text-900 shadow-1 h-2.5rem"
+        label="Invite"
+        icon="pi pi-user-plus"
+      ></button>
+    </div>
     <div class="flex flex-grow-1 flex-nowrap overflow-scroll h-full">
       <app-tasklist
-        *ngFor="let taskList of taskLists"
+        *ngFor="let taskList of project?.taskLists"
         [taskList]="taskList"
         [ngStyle]="{
           'margin-right':
-            taskLists === undefined || taskLists[taskLists.length] === taskList
+            project === undefined ||
+            project.taskLists[project.taskLists.length] === taskList
               ? '0rem'
               : '1rem'
         }"

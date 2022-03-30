@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Project } from 'src/app/objects/project';
 import { Task } from 'src/app/objects/task';
 import { TaskList } from 'src/app/objects/tasklist';
 
@@ -8,10 +9,16 @@ import { TaskList } from 'src/app/objects/tasklist';
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  taskLists?: TaskList[];
+  project: Project;
 
   constructor() {
-    this.taskLists = [];
+    this.project = {
+      id: 1,
+      name: 'Project 1',
+      taskLists: [],
+    };
+
+    let taskLists = this.project.taskLists;
 
     let taskId: number = 0;
 
@@ -29,7 +36,7 @@ export class ProjectComponent implements OnInit {
         tasks.push({ id: taskId, title: 'Task ' + taskId++ });
       }
 
-      this.taskLists.push({
+      taskLists.push({
         id: taskListId,
         name: 'TaskList ' + taskListId,
         tasks,
