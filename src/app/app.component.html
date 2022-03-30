@@ -1,5 +1,10 @@
-<div class="card" *ngIf="showNav()">
-  <div class="flex w-100 h-4rem bg-primary border-round shadow-2">
+<div id="navcard" class="card" *ngIf="showNav()">
+  <!-- Fixed position so the nav bar scrolls down with the page -->
+  <div
+    class="flex w-100 h-4rem bg-primary border-round shadow-2"
+    style="position: fixed"
+    [ngStyle]="{ width: navWidth }"
+  >
     <div
       class="flex align-items-center justify-content-center w-8rem h-full bg-blue-500 font-bold text-white border-round p-2"
     >
@@ -17,6 +22,8 @@
       <div></div>
     </div>
   </div>
+  <!-- This div creates empty space for the nav bar to sit -->
+  <div class="flex w-100 h-4rem border-round"></div>
 </div>
 
 <router-outlet></router-outlet>

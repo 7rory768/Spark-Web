@@ -1,8 +1,14 @@
 <div
   class="flex flex-column align-items-center justify-content-center shadow-2 m-0 border-round w-16rem p-2 surface-200"
 >
-  <app-taskpreview class="w-full m-0"></app-taskpreview>
-  <app-taskpreview class="w-full m-0"></app-taskpreview>
-  <app-taskpreview class="w-full m-0"></app-taskpreview>
-  <app-taskpreview class="w-full m-0"></app-taskpreview>
+  <div style="text-align: center">
+    <h3>{{ taskList?.name }}</h3>
+    <p>{{ taskList?.tasks?.length }} cards</p>
+  </div>
+
+  <app-taskpreview
+    *ngFor="let eachTask of taskList?.tasks"
+    [task]="eachTask"
+    class="w-full m-0"
+  ></app-taskpreview>
 </div>

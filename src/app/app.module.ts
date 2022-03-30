@@ -35,11 +35,20 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ProjectComponent } from './pages/project/project.component';
-import { TasklistComponent } from './components/tasklist/tasklist.component';
-import { TaskpreviewComponent } from './components/taskpreview/taskpreview.component';
+import { TaskListComponent } from './components/tasklist/tasklist.component';
+import { TaskPreviewComponent } from './components/taskpreview/taskpreview.component';
+import { TaskComponent } from './components/task/task.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, ProjectComponent, TasklistComponent, TaskpreviewComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    ProjectComponent,
+    TaskListComponent,
+    TaskPreviewComponent,
+    TaskComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

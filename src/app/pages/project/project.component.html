@@ -1,15 +1,16 @@
 <div class="card h-full" style="margin-top: 2rem">
   <div class="flex overflow-hidden flex-grow-1 flex-column h-full">
     <div class="flex flex-grow-1 flex-nowrap overflow-scroll h-full">
-      <app-tasklist></app-tasklist>
-      <app-tasklist></app-tasklist>
-      <app-tasklist></app-tasklist>
-      <app-tasklist></app-tasklist>
-      <app-tasklist></app-tasklist>
-      <app-tasklist></app-tasklist>
-      <app-tasklist></app-tasklist>
-      <app-tasklist></app-tasklist>
-      <app-tasklist></app-tasklist>
+      <app-tasklist
+        *ngFor="let taskList of taskLists"
+        [taskList]="taskList"
+        [ngStyle]="{
+          'margin-right':
+            taskLists === undefined || taskLists[taskLists.length] === taskList
+              ? '0rem'
+              : '1rem'
+        }"
+      ></app-tasklist>
     </div>
   </div>
 </div>

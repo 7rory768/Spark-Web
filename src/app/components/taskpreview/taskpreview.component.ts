@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from 'src/app/objects/task';
 
 @Component({
   selector: 'app-taskpreview',
   templateUrl: './taskpreview.component.html',
-  styleUrls: ['./taskpreview.component.scss']
+  styleUrls: ['./taskpreview.component.scss'],
 })
-export class TaskpreviewComponent implements OnInit {
+export class TaskPreviewComponent implements OnInit {
+  @Input('task') task?: Task;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
