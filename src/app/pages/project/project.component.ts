@@ -10,6 +10,7 @@ import { TaskList } from 'src/app/objects/tasklist';
 })
 export class ProjectComponent implements OnInit {
   project: Project;
+  @Input() selectedTask?: Task;
 
   constructor() {
     this.project = {
@@ -20,7 +21,7 @@ export class ProjectComponent implements OnInit {
 
     let taskLists = this.project.taskLists;
 
-    let taskId: number = 0;
+    let taskId: number = 1;
 
     for (
       let taskListId = 1;
@@ -45,4 +46,9 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onSelectTask(task: Task) {
+    this.selectedTask = task;
+    console.log('selectedTask:', task);
+  }
 }

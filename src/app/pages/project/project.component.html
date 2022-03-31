@@ -17,6 +17,7 @@
     <div class="flex flex-grow-1 flex-nowrap overflow-scroll h-full">
       <app-tasklist
         *ngFor="let taskList of project?.taskLists"
+        (onTaskSelect)="onSelectTask($event)"
         [taskList]="taskList"
         [ngStyle]="{
           'margin-right':
@@ -29,3 +30,60 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  [(visible)]="this.selectedTask"
+  header="{{ selectedTask?.title }}"
+  [style]="{ width: '50vw', color: 'black' }"
+>
+  <div>
+    <p-avatar label="R" shape="circle"></p-avatar>
+    <h3>Description</h3>
+    <p>Description here</p>
+    <h3>Checklist 1</h3>
+    <p-checkbox
+      class="w-full"
+      name="groupname"
+      value="Complete Frontend"
+      label="Complete Frontend"
+    ></p-checkbox>
+    <p-checkbox
+      class="w-full"
+      name="groupname"
+      value="Complete Frontend"
+      label="Complete Backend"
+      >Complete Backend</p-checkbox
+    >
+    <h3>Comments</h3>
+    <div class="flex">
+      <div class="flex">
+        <p-avatar label="R" shape="circle"></p-avatar>
+      </div>
+      <div class="flex flex-grow-1">
+        <input
+          pInputText
+          id="comment-input"
+          class="w-full"
+          type="text"
+          style="margin-left: 1rem"
+          placeholder="Enter a new comment here..."
+        />
+      </div>
+    </div>
+    <div class="flex">
+      <div class="flex">
+        <p-avatar label="L" shape="circle"></p-avatar>
+      </div>
+      <div class="flex align-content-end">
+        <p class="m-0 align-self-end bold-1" style="padding-left: 1rem">
+          Lauraine
+        </p>
+      </div>
+    </div>
+    <div class="flex m-2">
+      <div class="flex surface-card shadow-2 border-round">
+        <p style="margin: 1rem">This project sure is coming along nicely</p>
+      </div>
+    </div>
+  </div>
+</p-dialog>

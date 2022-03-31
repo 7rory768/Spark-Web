@@ -10,5 +10,6 @@
     *ngFor="let eachTask of taskList?.tasks"
     [task]="eachTask"
     class="w-full m-0"
+    (click)="select(eachTask)"
   ></app-taskpreview>
 </div>

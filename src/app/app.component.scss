@@ -1,0 +1,6 @@
+// All a tags within the navcard div will not underline text
+#navcard ::ng-deep {
+  a {
+    text-decoration: none;
+  }
+}

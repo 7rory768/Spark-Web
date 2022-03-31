@@ -10,3 +10,21 @@ p-button.grayButton {
     background-color: var(--surface-300);
   }
 }
+
+p-dialog ::ng-deep {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    color: black;
+  }
+
+  p-checkbox ::ng-deep {
+    color: black;
+  }
+}
+.p-dialog .p-dialog-header {
+  color: var(--bg-primary);
+}
