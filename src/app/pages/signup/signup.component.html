@@ -1,0 +1,28 @@
+<div class="card h-screen">
+    <div class="flex align-content-center justify-content-center flex-wrap card-container h-full">
+        <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+            <div class="text-center mb-5">
+                <img src="../../../assets/images/icon/sparkles-64.png" alt="Image" height="50" class="mb-3" />
+                <div class="text-900 text-3xl font-medium mb-3">Sign up with Spark</div>
+                <span class="text-600 font-medium line-height-3">Already have an account?</span>
+                <a href="/login" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Log In Now!</a>
+            </div>
+
+            <form>
+                <label for="email1">Email</label>
+                <input id="email1" type="text" />
+            </form>
+            <form>
+                <label for="password1">Password</label>
+                <input id="password1" type="text" />
+            </form>
+            <form>
+                <label for="password2">Confirm Password</label>
+                <input id="password2" type="text"/>
+            </form>
+            <div class="text-center mb-5">
+                <input type="button" icon="pi pi-user" value="Sign up" class="button" (click)="signUp()" />
+            </div>
+        </div>
+    </div>
+</div>
