@@ -12,6 +12,7 @@ p-button.grayButton {
 }
 
 p-dialog ::ng-deep {
+
   h1,
   h2,
   h3,
@@ -25,6 +26,32 @@ p-dialog ::ng-deep {
     color: black;
   }
 }
+
 .p-dialog .p-dialog-header {
   color: var(--bg-primary);
+}
+
+.project {
+  background-color: rgba(59, 175, 240, 0.20);
+}
+
+.button {
+  border: 1px solid #2394D3;
+  background-color: #3BAFF0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 38px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 20px;
+  cursor: pointer;
+
+  color: white;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 550;
+}
+
+.button:active {
+  background-color: #2394D3;
+  transform: translateY(2px);
 }

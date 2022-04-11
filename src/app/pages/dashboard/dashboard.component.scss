@@ -1,0 +1,115 @@
+.dashboard {
+    background-color: rgba(59, 175, 240, 0.20);
+}
+
+.dashboard-nav {
+    background-color: rgba(59, 175, 240, 0.72);
+    color: rgba(8, 82, 123, 0.72);
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px 0px;
+}
+
+.avatar {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.title {
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    padding: 0px 20px;
+    text-align: left;
+}
+
+.text {
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 0px 20px;
+    text-align: left;
+}
+
+.pad {
+    padding: 20px 20px;
+}
+
+.header {
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    color: rgba(8, 82, 123, 0.72);
+    text-align: left;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=text]:focus {
+    border: 1px solid lightblue;
+}
+
+input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=email]:focus {
+    border: 1px solid lightblue;
+}
+
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=password]:focus {
+    border: 1px solid lightblue;
+}
+
+.button {
+    border: 1px solid #2394D3;
+    background-color: #3BAFF0;
+    box-sizing: border-box;
+    // width: 5px;
+    // height: 38px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    // margin-top: 20px;
+    cursor: pointer;
+
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 550;
+}
+
+.button:active {
+    background-color: #2394D3;
+    transform: translateY(2px);
+}

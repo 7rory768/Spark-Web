@@ -4,3 +4,25 @@
     text-decoration: none;
   }
 }
+
+input[type=text] {
+  width: 20%;
+  padding: 5px 20px;
+  margin-right: 20px;
+  box-sizing: border-box;
+  background-color: #0B6DA5;
+  border: #3BAFF0;
+  color: white;
+
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=text]:focus {
+  border: 1px solid #3BAFF0;
+}
+
+input[type=text]::placeholder {
+  color: #FFFFFF;
+}

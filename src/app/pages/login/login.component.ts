@@ -11,7 +11,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  // TODO: find and validate info from database.
   signIn() {
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/project');
   }
 }

@@ -1,31 +1,26 @@
-.homepage {
+.projects {
     background-color: rgba(59, 175, 240, 0.20);
+    height: 100vh;
 }
 
-input[type=text] {
-    width: 45%;
-    padding: 8px 20px;
-    box-sizing: border-box;
-    border: 1px solid gray;
-    margin-right: 30px;
-
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-}
-
-input[type=text]:focus {
-    border: 1px solid lightblue;
+.title {
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    color: rgba(11, 109, 165, 0.72);
 }
 
 .button {
     border: 1px solid #2394D3;
     background-color: #3BAFF0;
     box-sizing: border-box;
+    width: 200px;
+    height: 38px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    width: 140px;
-    height: 30px;
+    margin-top: 20px;
     cursor: pointer;
+
     color: white;
     text-align: center;
     font-size: 17px;

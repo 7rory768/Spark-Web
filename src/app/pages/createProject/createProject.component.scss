@@ -1,5 +1,28 @@
-.login {
+.createproject {
     background-color: rgba(59, 175, 240, 0.20);
+}
+
+.title {
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 35px;
+    color: rgba(11, 109, 165, 0.72);
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=text]:focus {
+    border: 1px solid lightblue;
 }
 
 input[type=email] {

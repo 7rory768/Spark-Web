@@ -16,7 +16,9 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         console.log(val);
-        this.nav = val.urlAfterRedirects !== '/login';
+        (this.nav = val.urlAfterRedirects !== '/login') &&
+        (this.nav = val.urlAfterRedirects !== '/signup') &&
+        (this.nav = val.urlAfterRedirects !== '/homepage');
 
         var widthInterval = setInterval(() => {
           this.navWidth =
@@ -31,7 +33,11 @@ export class AppComponent implements OnInit {
     this.primengConfig.ripple = true;
   }
 
-  showNav() {
+  showNavBeforeLogIn() {
+    return !this.nav;
+  }
+
+  showNavAfterLogIn() {
     return this.nav;
   }
 }

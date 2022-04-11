@@ -1,0 +1,26 @@
+<div class="createproject card h-screen">
+    <div class="flex align-content-center justify-content-center flex-wrap card-container h-full">
+        <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+            <div class="text-center mb-5">
+                <img src="../../../assets/images/icon/sparkles-64.png" alt="Image" height="50" class="mb-3" />
+                <div class="title">Set Up Project</div>
+            </div>
+
+            <form>
+                <label for="name">Name Your Project</label>
+                <input id="name" type="text" />
+            </form>
+            <form>
+                <label for="email">Add Members</label>
+                <input id="email" type="email" />
+            </form>
+            <form>
+                <label for="description">Description</label>
+                <input id="description" type="text" />
+            </form>
+            <div class="text-center mb-5">
+                <input type="button" value="Create Project" class="button" (click)="createProject()" />
+            </div>
+        </div>
+    </div>
+</div>

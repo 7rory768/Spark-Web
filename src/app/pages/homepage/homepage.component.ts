@@ -12,8 +12,8 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // TODO: validate enmail, save email field for the signup page
   signUp() {
     this.router.navigateByUrl('/signup');
   }
-
 }

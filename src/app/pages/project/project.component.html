@@ -1,73 +1,48 @@
-<div class="card h-full">
+<div class="project card h-full">
+  <div class="flex w-100 h-5rem"></div>
   <div class="flex overflow-hidden flex-grow-1 flex-column h-full">
     <div class="flex w-full align-content-center">
       <h2 style="margin-right: 1rem">{{ project.name }}</h2>
       <p-avatarGroup class="flex align-content-center">
         <p-avatar label="RS" shape="circle" color="bg-blue-500"></p-avatar>
-        <p-avatar label="R" shape="circle"></p-avatar>
-        <p-avatar label="L" shape="circle"></p-avatar>
+        <p-avatar label="RR" shape="circle"></p-avatar>
+        <p-avatar label="LB" shape="circle"></p-avatar>
       </p-avatarGroup>
-      <button
-        pButton
-        class="flex align-self-center grayButton surface-300 border-300 text-900 shadow-1 h-2.5rem"
-        label="Invite"
-        icon="pi pi-user-plus"
-      ></button>
+      <div class="text-center">
+        <input type="button" value="Invite" class="button" (click)="inviteMember()" />
+      </div>
     </div>
     <div class="flex flex-grow-1 flex-nowrap overflow-scroll h-full">
-      <app-tasklist
-        *ngFor="let taskList of project?.taskLists"
-        (onTaskSelect)="onSelectTask($event)"
-        [taskList]="taskList"
-        [ngStyle]="{
+      <app-tasklist *ngFor="let taskList of project?.taskLists" (onTaskSelect)="onSelectTask($event)"
+        [taskList]="taskList" [ngStyle]="{
           'margin-right':
             project === undefined ||
             project.taskLists[project.taskLists.length] === taskList
               ? '0rem'
               : '1rem'
-        }"
-      ></app-tasklist>
+        }"></app-tasklist>
     </div>
   </div>
 </div>
 
-<p-dialog
-  [(visible)]="this.selectedTask"
-  header="{{ selectedTask?.title }}"
-  [style]="{ width: '50vw', color: 'black' }"
->
+<p-dialog [(visible)]="this.selectedTask" header="{{ selectedTask?.title }}"
+  [style]="{ width: '50vw', color: 'black' }">
   <div>
     <p-avatar label="R" shape="circle"></p-avatar>
     <h3>Description</h3>
     <p>Description here</p>
     <h3>Checklist 1</h3>
-    <p-checkbox
-      class="w-full"
-      name="groupname"
-      value="Complete Frontend"
-      label="Complete Frontend"
-    ></p-checkbox>
-    <p-checkbox
-      class="w-full"
-      name="groupname"
-      value="Complete Frontend"
-      label="Complete Backend"
-      >Complete Backend</p-checkbox
-    >
+    <p-checkbox class="w-full" name="groupname" value="Complete Frontend" label="Complete Frontend"></p-checkbox>
+    <p-checkbox class="w-full" name="groupname" value="Complete Frontend" label="Complete Backend">Complete Backend
+    </p-checkbox>
     <h3>Comments</h3>
     <div class="flex">
       <div class="flex">
         <p-avatar label="R" shape="circle"></p-avatar>
       </div>
       <div class="flex flex-grow-1">
-        <input
-          pInputText
-          id="comment-input"
-          class="w-full"
-          type="text"
-          style="margin-left: 1rem"
-          placeholder="Enter a new comment here..."
-        />
+        <input pInputText id="comment-input" class="w-full" type="text" style="margin-left: 1rem"
+          placeholder="Enter a new comment here..." />
       </div>
     </div>
     <div class="flex">

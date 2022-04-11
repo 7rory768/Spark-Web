@@ -9,9 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   constructor(private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
+  // TODO: validate all the text fields and save info in database. if email already exists, do not make another account.
   signUp() {
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/project');
   }
 }

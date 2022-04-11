@@ -5,6 +5,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ProjectComponent } from './pages/project/project.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.component';
+import { CreateProjectComponent } from './pages/createProject/createProject.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'project', component: ViewProjectsComponent },
+  { path: 'createNewProject', component: CreateProjectComponent },
   { path: 'project/:project-id', component: ProjectComponent },
   { path: 'project/:project-id/task/:task-id', component: ProjectComponent },
 ];

@@ -45,10 +45,13 @@ export class ProjectComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSelectTask(task: Task) {
     this.selectedTask = task;
     console.log('selectedTask:', task);
   }
+
+  // TODO: goes to another page to invite others
+  inviteMember() { }
 }
