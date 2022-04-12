@@ -1,10 +1,12 @@
 import { Checklist } from './checklist';
 
 export interface Task {
-  id: number;
-  title: string;
+  projectId: number;
+  listName: string;
+  name: string;
+  description: string;
   dateCreated?: Date;
-  PriorityNum?: number;
+  priority?: number;
   deadline?: Date;
   completed?: number;
   competionPoints?: number;

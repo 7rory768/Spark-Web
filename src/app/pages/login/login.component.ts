@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginResponse, UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +8,25 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) {}
+  public email: string = '';
+  public password: string = '';
+
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {}
 
   // TODO: find and validate info from database.
   signIn() {
-    this.router.navigateByUrl('/project');
+    this.userService.attemptLogin(this.email, this.password).subscribe({
+      next: (result: LoginResponse) => {
+        if (result == LoginResponse.Success) {
+          this.router.navigateByUrl('/project');
+        } else if (result == LoginResponse.UnknownUser) {
+          // TODO:
+        } else if (result == LoginResponse.IncorrectPassword) {
+          // TODO:
+        }
+      },
+    });
   }
 }

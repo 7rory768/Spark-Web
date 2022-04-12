@@ -1,54 +1,62 @@
 .login {
-    background-color: rgba(59, 175, 240, 0.20);
+  background-color: rgba(59, 175, 240, 0.2);
 }
 
-input[type=email] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
+input[type="text"] {
+  width: 100%;
+  margin: 8px 0;
+  box-sizing: border-box;
 
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
 }
 
-input[type=email]:focus {
-    border: 1px solid lightblue;
+input[type="text"]:focus {
+  border: 1px solid lightblue;
 }
 
-input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
+p-password::ng-deep .p-password-input,
+p-password::ng-deep .p-password {
+  width: 100% !important;
 }
 
-input[type=password]:focus {
-    border: 1px solid lightblue;
+p-password::ng-deep .p-password {
+  margin: 8px 0;
+}
+
+input[type="password"] {
+  width: 100% !important;
+  padding: 12px 20px !important;
+  margin: 8px 0 !important;
+  box-sizing: border-box !important;
+
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type="password"]:focus {
+  border: 1px solid lightblue;
 }
 
 .button {
-    border: 1px solid #2394D3;
-    background-color: #3BAFF0;
-    box-sizing: border-box;
-    width: 100%;
-    height: 38px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-top: 20px;
-    cursor: pointer;
+  border: 1px solid #2394d3;
+  background-color: #3baff0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 38px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 20px;
+  cursor: pointer;
 
-    color: white;
-    text-align: center;
-    font-size: 17px;
-    font-weight: 550;
+  color: white;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 550;
 }
 
 .button:active {
-    background-color: #2394D3;
-    transform: translateY(2px);
+  background-color: #2394d3;
+  transform: translateY(2px);
 }

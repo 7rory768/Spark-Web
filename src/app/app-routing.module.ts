@@ -7,17 +7,38 @@ import { ProjectComponent } from './pages/project/project.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.component';
 import { CreateProjectComponent } from './pages/createProject/createProject.component';
+import { RouteGuardService } from './services/route-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   { path: 'homepage', component: HomepageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'project', component: ViewProjectsComponent },
-  { path: 'createNewProject', component: CreateProjectComponent },
-  { path: 'project/:project-id', component: ProjectComponent },
-  { path: 'project/:project-id/task/:task-id', component: ProjectComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [RouteGuardService],
+  },
+  {
+    path: 'project',
+    component: ViewProjectsComponent,
+    canActivate: [RouteGuardService],
+  },
+  {
+    path: 'createNewProject',
+    component: CreateProjectComponent,
+    canActivate: [RouteGuardService],
+  },
+  {
+    path: 'project/:project-id',
+    component: ProjectComponent,
+    canActivate: [RouteGuardService],
+  },
+  {
+    path: 'project/:project-id/task/:task-id',
+    component: ProjectComponent,
+    canActivate: [RouteGuardService],
+  },
 ];
 
 @NgModule({

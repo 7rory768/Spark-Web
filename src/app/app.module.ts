@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -34,10 +34,15 @@ import { DialogModule } from 'primeng/dialog';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { FormsModule } from '@angular/forms';
 import { ProjectComponent } from './pages/project/project.component';
 import { TaskListComponent } from './components/tasklist/tasklist.component';
 import { TaskPreviewComponent } from './components/taskpreview/taskpreview.component';
 import { TaskComponent } from './components/task/task.component';
+import { RequestInterceptorService } from './services/request-interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,6 +58,7 @@ import { TaskComponent } from './components/task/task.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     // PrimeNG
     CheckboxModule,
     ButtonModule,
@@ -82,8 +88,16 @@ import { TaskComponent } from './components/task/task.component';
     AvatarModule,
     AvatarGroupModule,
     OverlayPanelModule,
+    FormsModule,
+    ProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

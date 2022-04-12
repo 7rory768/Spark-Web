@@ -15,11 +15,13 @@ export class ProjectComponent implements OnInit {
   constructor() {
     this.project = {
       id: 1,
+      teamId: 1,
       name: 'Project 1',
+      mgrUsername: 'rory',
       taskLists: [],
     };
 
-    let taskLists = this.project.taskLists;
+    let taskLists: TaskList[] = this.project.taskLists!;
 
     let taskId: number = 1;
 
@@ -34,10 +36,17 @@ export class ProjectComponent implements OnInit {
         taskNum < Math.floor(Math.random() * (12 - 3 + 1)) + 3;
         taskNum++
       ) {
-        tasks.push({ id: taskId, title: 'Task ' + taskId++ });
+        tasks.push({
+          projectId: 1,
+          listName: 'TaskList' + taskListId,
+          name: 'Task ' + taskId++,
+          description: 'Description',
+          priority: taskId,
+        });
       }
 
       taskLists.push({
+        projectId: 1,
         id: taskListId,
         name: 'TaskList ' + taskListId,
         tasks,
@@ -45,7 +54,7 @@ export class ProjectComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onSelectTask(task: Task) {
     this.selectedTask = task;
@@ -53,5 +62,5 @@ export class ProjectComponent implements OnInit {
   }
 
   // TODO: goes to another page to invite others
-  inviteMember() { }
+  inviteMember() {}
 }
