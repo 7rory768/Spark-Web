@@ -2,16 +2,20 @@
   <div class="flex w-100 h-5rem"></div>
   <div class="flex overflow-hidden flex-grow-1 flex-column h-full">
     <div class="flex w-full align-content-center">
-      <h2 style="margin-right: 1rem">{{ project.name }}</h2>
+      <h2 class="mt-4" style="margin-right: 1rem">{{ project.name }}</h2>
       <p-avatarGroup class="flex align-content-center">
         <p-avatar label="RS" shape="circle" color="bg-blue-500"></p-avatar>
         <p-avatar label="RR" shape="circle"></p-avatar>
         <p-avatar label="LB" shape="circle"></p-avatar>
       </p-avatarGroup>
-      <div class="text-center">
-        <input type="button" value="Invite" class="button" (click)="inviteMember()" />
+      <div>
+        <input type="button" value="Invite" class="button b0" (click)="inviteMember()" />
+      </div>
+      <div>
+        <input type="button" value="+ Add List" class="button" (click)="addList()" />
       </div>
     </div>
+    <br>
     <div class="flex flex-grow-1 flex-nowrap overflow-scroll h-full">
       <app-tasklist *ngFor="let taskList of project?.taskLists" (onTaskSelect)="onSelectTask($event)"
         [taskList]="taskList" [ngStyle]="{
@@ -28,7 +32,7 @@
 <p-dialog [(visible)]="this.selectedTask" header="{{ selectedTask?.title }}"
   [style]="{ width: '50vw', color: 'black' }">
   <div>
-    <p-avatar label="R" shape="circle"></p-avatar>
+    <p-avatar label="RR" shape="circle"></p-avatar>
     <h3>Description</h3>
     <p>Description here</p>
     <h3>Checklist 1</h3>
@@ -38,7 +42,7 @@
     <h3>Comments</h3>
     <div class="flex">
       <div class="flex">
-        <p-avatar label="R" shape="circle"></p-avatar>
+        <p-avatar label="RS" shape="circle"></p-avatar>
       </div>
       <div class="flex flex-grow-1">
         <input pInputText id="comment-input" class="w-full" type="text" style="margin-left: 1rem"
@@ -47,11 +51,11 @@
     </div>
     <div class="flex">
       <div class="flex">
-        <p-avatar label="L" shape="circle"></p-avatar>
+        <p-avatar label="LB" shape="circle"></p-avatar>
       </div>
       <div class="flex align-content-end">
         <p class="m-0 align-self-end bold-1" style="padding-left: 1rem">
-          Lauraine
+          Lauraine Baffot
         </p>
       </div>
     </div>

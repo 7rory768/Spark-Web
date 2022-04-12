@@ -37,6 +37,10 @@
 
 .pad {
     padding: 20px 20px;
+    margin: 60px;
+    margin-right: 100px;
+    margin-left: 100px;
+    width: 600px;
 }
 
 .header {
@@ -48,7 +52,7 @@
     text-align: left;
 }
 
-input[type=text] {
+input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -59,37 +63,7 @@ input[type=text] {
     outline: none;
 }
 
-input[type=text]:focus {
-    border: 1px solid lightblue;
-}
-
-input[type=email] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-}
-
-input[type=email]:focus {
-    border: 1px solid lightblue;
-}
-
-input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-}
-
-input[type=password]:focus {
+input:focus {
     border: 1px solid lightblue;
 }
 
@@ -112,4 +86,18 @@ input[type=password]:focus {
 .button:active {
     background-color: #2394D3;
     transform: translateY(2px);
+}
+
+.box {
+    width: 300px;
+    height: 100px;
+    border: 1px solid rgba(11, 109, 165, 0.72);
+    background-color: white;
+    cursor: pointer;
+    color:rgba(11, 109, 165, 0.72);
+    text-align: left;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

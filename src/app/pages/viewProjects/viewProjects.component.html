@@ -1,8 +1,15 @@
 <div class="projects">
     <div class="flex w-100 h-8rem"></div>
 
-    <div>
+    <div class="flex">
         <h1 class="title">Your Projects</h1>
         <input type="button" value="+ Create New Project" class="button" (click)="createProject()" />
     </div>
+
+    <button class="box" (click)="viewProject()">
+        <h1>Project Name</h1> 
+        <h2>Team Name</h2> 
+        <h4 class="mb-5 mt-5">Description</h4>
+    </button>
+
 </div>

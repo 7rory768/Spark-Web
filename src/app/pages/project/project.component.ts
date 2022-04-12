@@ -52,6 +52,9 @@ export class ProjectComponent implements OnInit {
     console.log('selectedTask:', task);
   }
 
-  // TODO: goes to another page to invite others
+  // TODO: goes to a floating page to invite others
   inviteMember() { }
+
+  // TODO: adds another list to the project
+  addList() {}
 }
