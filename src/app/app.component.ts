@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,19 @@ export class AppComponent implements OnInit {
   nav: boolean = false;
   navWidth: string = '0';
 
-  constructor(private primengConfig: PrimeNGConfig, private router: Router) {
+  // UserService must be injected so that it is always active
+  constructor(
+    private primengConfig: PrimeNGConfig,
+    private router: Router,
+    private userService: UserService
+  ) {
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         console.log(val);
-        (this.nav = val.urlAfterRedirects !== '/login') &&
-        (this.nav = val.urlAfterRedirects !== '/signup') &&
-        (this.nav = val.urlAfterRedirects !== '/homepage');
+        this.nav =
+          val.urlAfterRedirects !== '/login' &&
+          val.urlAfterRedirects !== '/signup' &&
+          val.urlAfterRedirects !== '/homepage';
 
         var widthInterval = setInterval(() => {
           this.navWidth =
@@ -39,5 +46,9 @@ export class AppComponent implements OnInit {
 
   showNavAfterLogIn() {
     return this.nav;
+  }
+
+  navigate(url: string) {
+    this.router.navigateByUrl(url);
   }
 }
