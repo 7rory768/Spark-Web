@@ -26,12 +26,11 @@ export class RequestInterceptorService implements HttpInterceptor {
 
     const isApiUrl = request.url.startsWith(environment.apiUrl);
 
-    if (!isApiUrl)
-      if (isLoggedIn && isApiUrl) {
-        request = request.clone({
-          setHeaders: { Authorization: `${user.username}` },
-        });
-      }
+    if (isLoggedIn && isApiUrl) {
+      request = request.clone({
+        setHeaders: { Authorization: `${user.username}` },
+      });
+    }
 
     return next.handle(request);
   }
