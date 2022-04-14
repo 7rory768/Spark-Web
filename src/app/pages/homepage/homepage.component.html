@@ -8,10 +8,10 @@
                     productivity.</div>
             </div>
             <div class="text-center mb-5">
-                <div>
-                    <input id="email" type="text" class="text-field" />
-                    <input type="button" value="Sign Up Now!" class="button" (click)="signUp()" />
-                </div>
+                <form>
+                    <input pInputText class="w-6 text-field" [(ngModel)]="email" name="email" type="email" />
+                    <input pButton type="button" value="Sign Up Now!" class="button" (click)="signUp()" />
+                </form>
             </div>
         </div>
     </div>

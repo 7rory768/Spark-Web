@@ -7,19 +7,20 @@
             </div>
 
             <form>
-                <label for="name">Name Your Project</label>
-                <input id="name" type="text" />
+                <label class="w-full" for="projectName">Project Name</label>
+                <input pInputText class="w-full" [(ngModel)]="projectName" name="projectName" type="text" />
             </form>
             <form>
-                <label for="email">Add Members or Team</label>
-                <input id="email" type="email" />
+                <label class="w-full" for="teamName">Team</label>
+                <p-dropdown class="w-full" [options]="teams" [(ngModel)]="teamName" optionLabel="name"></p-dropdown>
             </form>
             <form>
-                <label for="description">Description</label>
-                <textarea id="description"></textarea>
+                <label class="w-full" for="description">Description</label>
+                <textarea rows="5" pInputTextarea [autoResize]="true" class="w-full" [(ngModel)]="description"
+                    name="description"></textarea>
             </form>
-            <div class="text-center mb-5">
-                <input type="button" value="Create Project" class="button" (click)="createProject()" />
+            <div class="text-center">
+                <input pButton type="button" value="Create Project" class="button" (click)="createProject()" />
             </div>
         </div>
     </div>

@@ -6,69 +6,38 @@
     <div class="flex overflow-hidden flex-grow-1 flex-column h-full">
       <div class="flex w-full align-content-center">
         <h2 class="mt-4" style="margin-right: 1rem">{{ project.name }}</h2>
-        <p-avatarGroup class="flex align-content-center">
+        <p-avatarGroup class="flex align-content-center mr-3">
           <p-avatar label="RS" shape="circle" color="bg-blue-500"></p-avatar>
           <p-avatar label="RR" shape="circle"></p-avatar>
           <p-avatar label="LB" shape="circle"></p-avatar>
         </p-avatarGroup>
-        <div>
-          <input
-            type="button"
-            value="Invite"
-            class="button b0"
-            (click)="inviteMember()"
-          />
-        </div>
-        <div>
-          <input
-            type="button"
-            value="+ Add List"
-            class="button b0"
-            (click)="addList()"
-          />
-        </div>
+        <input pButton type="button" value="Invite" class="button pi pi-user" (click)="inviteMember()" />
       </div>
-      <br />
+      <div>
+        <input pButton type="button" value="+ Add List" class="button" (click)="addList()" />
+      </div>
       <div class="flex flex-grow-1 flex-nowrap overflow-scroll h-full">
-        <app-tasklist
-          *ngFor="let taskList of project?.taskLists"
-          (onTaskSelect)="onSelectTask($event)"
-          [taskList]="taskList"
-          [ngStyle]="{
+        <app-tasklist *ngFor="let taskList of project?.taskLists" (onTaskSelect)="onSelectTask($event)"
+          [taskList]="taskList" [ngStyle]="{
             'margin-right':
               project === undefined ||
               project.taskLists[project.taskLists.length] === taskList
                 ? '0rem'
                 : '1rem'
-          }"
-        ></app-tasklist>
+          }"></app-tasklist>
       </div>
     </div>
   </div>
 </ng-container>
 
-<p-dialog
-  [(visible)]="this.selectedTask"
-  header="{{ selectedTask?.name }}"
-  [style]="{ width: '50vw', color: 'black' }"
->
+<p-dialog [(visible)]="this.selectedTask" header="{{ selectedTask?.name }}" [style]="{ width: '50vw', color: 'black' }">
   <div>
     <p-avatar label="RR" shape="circle"></p-avatar>
     <h3>Description</h3>
     <p>Description here</p>
     <h3>Checklist 1</h3>
-    <p-checkbox
-      class="w-full"
-      name="groupname"
-      value="Complete Frontend"
-      label="Complete Frontend"
-    ></p-checkbox>
-    <p-checkbox
-      class="w-full"
-      name="groupname"
-      value="Complete Frontend"
-      label="Complete Backend"
-      >Complete Backend
+    <p-checkbox class="w-full" name="groupname" value="Complete Frontend" label="Complete Frontend"></p-checkbox>
+    <p-checkbox class="w-full" name="groupname" value="Complete Frontend" label="Complete Backend">Complete Backend
     </p-checkbox>
     <h3>Comments</h3>
     <div class="flex">
@@ -76,14 +45,8 @@
         <p-avatar label="RS" shape="circle"></p-avatar>
       </div>
       <div class="flex flex-grow-1">
-        <input
-          pInputText
-          id="comment-input"
-          class="w-full"
-          type="text"
-          style="margin-left: 1rem"
-          placeholder="Enter a new comment here..."
-        />
+        <input pInputText id="comment-input" class="w-full" type="text" style="margin-left: 1rem"
+          placeholder="Enter a new comment here..." />
       </div>
     </div>
     <div class="flex">

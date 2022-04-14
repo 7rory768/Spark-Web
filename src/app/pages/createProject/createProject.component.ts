@@ -7,7 +7,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./createProject.component.scss']
 })
 export class CreateProjectComponent implements OnInit {
-  constructor(private router: Router) { }
+  public projectName: string = '';
+  public teamName: string = '';
+  public teams: string[] = [];
+  public description: string = '';
+
+  constructor(private router: Router) {
+    this.teams = ['Team A', 'Team B', 'Team C'];
+  }
 
   ngOnInit(): void {
   }

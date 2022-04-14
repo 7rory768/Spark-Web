@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -41,18 +41,25 @@ import { TaskListComponent } from './components/tasklist/tasklist.component';
 import { TaskPreviewComponent } from './components/taskpreview/taskpreview.component';
 import { TaskComponent } from './components/task/task.component';
 import { RequestInterceptorService } from './services/request-interceptor.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { SignupComponent } from './pages/signup/signup.component';
+import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.component';
+import { CreateProjectComponent } from './pages/createProject/createProject.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
+    SignupComponent,
+    ProfileComponent,
+    ViewProjectsComponent,
     ProjectComponent,
     TaskListComponent,
     TaskPreviewComponent,
     TaskComponent,
+    CreateProjectComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,

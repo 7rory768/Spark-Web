@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
+  public email: string = '';
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {

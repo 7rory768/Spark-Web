@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RegisterResponse, UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +8,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  constructor(private router: Router) { }
+  public fName: string = '';
+  public lName: string = '';
+  public email: string = '';
+  public password: string = '';
+  public confirmPassword: string = '';
 
-  ngOnInit(): void {}
+  constructor(private userService: UserService, private router: Router) { }
+
+  ngOnInit(): void { }
 
   // TODO: validate all the text fields and save info in database. if email already exists, do not make another account.
   signUp() {

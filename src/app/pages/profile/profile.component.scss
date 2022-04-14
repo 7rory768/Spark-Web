@@ -1,8 +1,8 @@
-.dashboard {
+.profile {
     background-color: rgba(59, 175, 240, 0.20);
 }
 
-.dashboard-nav {
+.profile-nav {
     background-color: rgba(59, 175, 240, 0.72);
     color: rgba(8, 82, 123, 0.72);
     align-items: flex-end;
@@ -16,23 +16,16 @@
     border-radius: 50%;
 }
 
-.title {
-    font-family: sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    color: white;
-    padding: 0px 20px;
-    text-align: left;
-}
-
 .text {
-    font-family: sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     padding: 0px 20px;
     text-align: left;
+
+    .white {
+        color: white;
+    }
 }
 
 .pad {
@@ -44,7 +37,6 @@
 }
 
 .header {
-    font-family: sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 25px;
@@ -52,19 +44,19 @@
     text-align: left;
 }
 
-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
+p-password::ng-deep .p-password-input,
+p-password::ng-deep .p-password {
+    width: 100% !important;
 }
 
-input:focus {
-    border: 1px solid lightblue;
+p-password::ng-deep .p-password {
+    margin: 8px 0;
+}
+
+input {
+    width: 100%;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
 
 .button {
@@ -78,7 +70,6 @@ input:focus {
     cursor: pointer;
 
     color: white;
-    text-align: center;
     font-size: 17px;
     font-weight: 550;
 }
@@ -92,9 +83,8 @@ input:focus {
     width: 300px;
     height: 100px;
     border: 1px solid rgba(11, 109, 165, 0.72);
-    background-color: white;
     cursor: pointer;
-    color:rgba(11, 109, 165, 0.72);
+    color: rgba(11, 109, 165, 0.72);
     text-align: left;
     font-family: sans-serif;
     font-style: normal;

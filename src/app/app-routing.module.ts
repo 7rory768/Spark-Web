@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ProjectComponent } from './pages/project/project.component';
@@ -15,29 +15,29 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [RouteGuardService],
+    path: 'profile',
+    component: ProfileComponent,
+    // canActivate: [RouteGuardService],
   },
   {
     path: 'project',
     component: ViewProjectsComponent,
-    canActivate: [RouteGuardService],
+    // canActivate: [RouteGuardService],
   },
   {
     path: 'createNewProject',
     component: CreateProjectComponent,
-    canActivate: [RouteGuardService],
+    // canActivate: [RouteGuardService],
   },
   {
     path: 'project/:project-id',
     component: ProjectComponent,
-    canActivate: [RouteGuardService],
+    // canActivate: [RouteGuardService],
   },
   {
     path: 'project/:project-id/task/:task-id',
     component: ProjectComponent,
-    canActivate: [RouteGuardService],
+    // canActivate: [RouteGuardService],
   },
 ];
 

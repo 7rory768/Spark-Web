@@ -1,0 +1,71 @@
+<div class="profile">
+    <div class="profile-nav flex w-100 h-15rem text-center">
+        <img src="../../../assets/images/avatar-pic.png" alt="avatar" class="avatar">
+        <div class="flex-wrap text">
+            <div class="text-white">
+                <h1>FName LName</h1>
+            </div>
+            <h3>@username</h3>
+            <h3>Total Points: XXXX</h3>
+        </div>
+    </div>
+
+    <div class="flex align-content-center justify-content-center">
+        <div class="pad p-4 shadow-2 border-round surface-card">
+            <div class="text-center mb-5">
+                <div class="header">Manage Profile</div>
+            </div>
+
+            <form>
+                <label class="w-full" for="username">Username</label>
+                <input pInputText class="w-full" [(ngModel)]="username" name="username" type="text" />
+            </form>
+            <form>
+                <label class="w-full" for="fName">First Name</label>
+                <input pInputText class="w-full" [(ngModel)]="fName" name="fName" type="text" />
+            </form>
+            <form>
+                <label class="w-full" for="lName">Last Name</label>
+                <input pInputText class="w-full" [(ngModel)]="lName" name="lName" type="text" />
+            </form>
+            <form>
+                <label class="w-full" for="email">Email</label>
+                <input pInputText class="w-full" [(ngModel)]="email" name="email" type="email" />
+            </form>
+            <form>
+                <label class="w-full" for="password">Password</label>
+                <p-password class="w-full" [(ngModel)]="password" name="password" type="password" [feedback]="false"
+                    [toggleMask]="true"></p-password>
+            </form>
+            <div class="text-center">
+                <input pButton type="button" value="Save Changes" class="button" (click)="save()" />
+            </div>
+        </div>
+
+        <div class="pad p-4 shadow-2 border-round surface-card">
+            <div class="text-center mb-5">
+                <div class="header">Teams</div>
+            </div>
+
+            <div class="flex-wrap">
+                <button class="box w-full mb-5 profile" (click)="showTeamDetail()">
+                    <h3>Team Name</h3>
+                    <h4>Joined Since XXXX</h4>
+                </button>
+
+                <button class="box w-full mb-5 profile" (click)="showTeamDetail()">
+                    <h3>Team Name</h3>
+                    <h4>Joined Since XXXX</h4>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Team Name" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [draggable]="true"
+    [resizable]="true">
+    <p>
+    </p>
+    <ng-template pTemplate="footer">
+    </ng-template>
+</p-dialog>
