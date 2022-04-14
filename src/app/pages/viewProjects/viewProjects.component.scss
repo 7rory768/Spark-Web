@@ -35,8 +35,9 @@
 
 .box {
     width: 300px;
-    height: 200px;
-    border: 1px solid rgba(11, 109, 165, 0.72);
+    // height: 200px;
+    // border: 1px solid rgba(11, 109, 165, 0.72);
+    border: 4px solid rgba(11, 109, 165, 0.72);
     background-color: white;
     cursor: pointer;
     color: #2394D3;
@@ -46,6 +47,6 @@
     font-weight: 700;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin-top: 30px;
-    margin-left: 150px;
+    margin-left: 25px;
     margin-bottom: 60px;
 }
