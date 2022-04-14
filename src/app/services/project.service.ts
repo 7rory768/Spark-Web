@@ -5,9 +5,8 @@ import { Project } from '../objects/project';
 import { HttpService } from './http.service';
 import { UserService } from './user.service';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
   private allUserProjects: Project[] | undefined;
@@ -20,31 +19,23 @@ export class ProjectService {
     return this.allUserProjects;
   }
 
-  attemptGetAll(): Subject<GetProjectsResponse> {
-    let subject = new Subject<GetProjectsResponse>();
+  attemptGetAll(): Subject<Project[]> {
+    let subject = new Subject<Project[]>();
 
     // TODO: http
-    console.log(this.userService.getUser())
+    console.log(this.userService.getUser());
     this.http.get('projects/viewProjects', {}).subscribe({
       next: (response: any) => {
-        if ((response.message == GetProjectsResponse.Success)) {
-          this.allUserProjects = response.value;
-        }
-
-        subject.next(response.message);
+        subject.next(response.value);
         return response;
       },
       // error: (error) => {
       //   console.log('error', error);
       //   return error;
       // },
-      complete: () => { },
+      complete: () => {},
     });
 
     return subject;
   }
-}
-
-export enum GetProjectsResponse {
-  Success = 'Got participating projects successfully',
 }
