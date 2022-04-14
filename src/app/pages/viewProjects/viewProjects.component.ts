@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/objects/project';
 import { ProjectService } from 'src/app/services/project.service';
 import { ProjectComponent } from '../project/project.component';
+import { TeamService } from 'src/app/services/team.service';
+import { Team } from 'src/app/objects/team';
 
 @Component({
   selector: 'app-viewProjects',
@@ -11,8 +13,9 @@ import { ProjectComponent } from '../project/project.component';
 })
 export class ViewProjectsComponent implements OnInit {
   projects: Project[] | undefined;
+  teams: Team[] | undefined;
 
-  constructor(private router: Router, private projectService: ProjectService) {}
+  constructor(private router: Router, private projectService: ProjectService, private teamService: TeamService) {}
 
   ngOnInit(): void {
     this.projectService.attemptGetAll().subscribe({
@@ -20,6 +23,12 @@ export class ViewProjectsComponent implements OnInit {
         this.projects = result;
       },
     });
+    this.teamService.attemptGetAll().subscribe({
+      next: (result: Team[]) => {
+        this.teams = result;
+      },
+    });
+    console.log('getting teams', this.teams)
   }
 
   createProject() {
@@ -30,4 +39,10 @@ export class ViewProjectsComponent implements OnInit {
     this.projectService.cache(project);
     this.router.navigateByUrl('/project/' + project.id);
   }
+
+  findTeamName(teamId: number){
+    const team_obj = this.teams!.find( (team) => team.id === teamId)
+    return team_obj;
+  }
 }
+
