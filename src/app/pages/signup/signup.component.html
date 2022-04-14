@@ -21,6 +21,10 @@
                 <input pInputText class="w-full" [(ngModel)]="email" name="email" type="email"/>
             </form>
             <form>
+                <label class="w-full" for="username">Username</label>
+                <input pInputText class="w-full" [(ngModel)]="username" name="username" type="text"/>
+            </form>
+            <form>
                 <label class="w-full" for="password">Password</label>
                 <p-password class="w-full" [(ngModel)]="password" name="password" type="password" [feedback]="false"
                     [toggleMask]="true"></p-password>

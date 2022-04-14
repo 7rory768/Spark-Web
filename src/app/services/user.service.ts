@@ -24,7 +24,7 @@ export class UserService {
     // TODO: http
     this.http.post('users/login', { username, password }).subscribe({
       next: (response: any) => {
-        if ((response.message = LoginResponse.Success)) {
+        if ((response.message == LoginResponse.Success)) {
           this.user = response.value;
         }
 
@@ -35,18 +35,33 @@ export class UserService {
       //   console.log('error', error);
       //   return error;
       // },
-      complete: () => {},
+      complete: () => { },
     });
 
     return subject;
   }
 
-  attemptRegister(username: string, password: string): Observable<User> {
-    let obs = new Observable<User>();
+  attemptRegister(username: string, firstName: string, lastName: string, password: string, email: string): Subject<RegisterResponse> {
+    let subject = new Subject<RegisterResponse>();
 
     // TODO: http
+    this.http.post('users/create', { username, firstName, lastName, password, email }).subscribe({
+      next: (response: any) => {
+        if ((response.message == RegisterResponse.Success)) {
+          this.user = response.value;
+        }
 
-    return obs;
+        subject.next(response.message);
+        return response;
+      },
+      // error: (error) => {
+      //   console.log('error', error);
+      //   return error;
+      // },
+      complete: () => { },
+    });
+
+    return subject;
   }
 }
 
@@ -57,6 +72,6 @@ export enum LoginResponse {
 }
 
 export enum RegisterResponse {
-  UserAlreadyExists,
-  Success,
+  UserAlreadyExist = 'User already exists',
+  Success = 'User created successfully',
 }
