@@ -27,9 +27,11 @@ export class AppComponent implements OnInit {
       if (val instanceof NavigationEnd) {
         console.log(val);
         this.nav =
-          val.urlAfterRedirects !== '/login' &&
-          val.urlAfterRedirects !== '/signup' &&
-          val.urlAfterRedirects !== '/homepage';
+          val.urlAfterRedirects !== '/project' &&
+          val.urlAfterRedirects !== '/profile' &&
+          val.urlAfterRedirects !== '/createNewProject' &&
+          val.urlAfterRedirects !== '/project/:project-id' &&
+          val.urlAfterRedirects !== '/project/:project-id/task/:task-id';
 
         var widthInterval = setInterval(() => {
           this.navWidth =
@@ -45,11 +47,11 @@ export class AppComponent implements OnInit {
   }
 
   showNavBeforeLogIn() {
-    return !this.nav;
+    return this.nav;
   }
 
   showNavAfterLogIn() {
-    return this.nav;
+    return !this.nav;
   }
 
   navigate(url: string) {
