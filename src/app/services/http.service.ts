@@ -20,7 +20,7 @@ export class HttpService {
     return this.http.put(environment.apiUrl + endpoint, body);
   }
 
-  public delete(endpoint: string, body: any) {
+  public delete(endpoint: string, body: any = {}) {
     return this.http.delete(environment.apiUrl + endpoint, body);
   }
 }

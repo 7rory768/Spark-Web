@@ -26,7 +26,7 @@ export class ProjectComponent implements OnInit {
 
         this.project = projectService.getFromCache(projectId);
 
-        let taskList = taskListService.getTaskLists(projectId).subscribe({
+        taskListService.getTaskLists(projectId).subscribe({
           next: (taskLists: TaskList[]) =>
             (this.project!.taskLists = taskLists),
         });
