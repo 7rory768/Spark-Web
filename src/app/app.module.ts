@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,7 +42,7 @@ import { TaskListComponent } from './components/tasklist/tasklist.component';
 import { TaskPreviewComponent } from './components/taskpreview/taskpreview.component';
 import { TaskComponent } from './components/task/task.component';
 import { RequestInterceptorService } from './services/request-interceptor.service';
-import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.component';
 import { CreateProjectComponent } from './pages/createProject/createProject.component';
@@ -104,6 +105,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
       useClass: RequestInterceptorService,
       multi: true,
     },
+    CookieService,
   ],
   bootstrap: [AppComponent],
 })

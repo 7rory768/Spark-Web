@@ -15,6 +15,9 @@ export class ProjectComponent implements OnInit {
   project?: Project;
   @Input() selectedTask?: Task;
 
+  addListView = false;
+  newList?: TaskList;
+
   constructor(
     private projectService: ProjectService,
     private taskListService: TaskListService,
@@ -30,6 +33,12 @@ export class ProjectComponent implements OnInit {
           next: (taskLists: TaskList[]) =>
             (this.project!.taskLists = taskLists),
         });
+
+        this.newList = {
+          id: -1,
+          projectId: this.project!.id,
+          name: 'New List',
+        };
       },
     });
   }
@@ -45,5 +54,7 @@ export class ProjectComponent implements OnInit {
   inviteMember() {}
 
   // TODO: adds another list to the project
-  addList() {}
+  addList() {
+    this.addListView = true;
+  }
 }

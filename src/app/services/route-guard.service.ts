@@ -23,7 +23,10 @@ export class RouteGuardService implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.userService.getUser() == null) {
+    if (
+      this.userService.finishedLoadingFromCookie &&
+      this.userService.getUser() == null
+    ) {
       console.log('checking user', this.userService.getUser());
       console.log('Blocked route activation', route);
       return this.router.parseUrl('/homepage');
