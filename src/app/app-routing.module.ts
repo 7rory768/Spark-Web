@@ -17,27 +17,27 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    // canActivate: [RouteGuardService],
+    canActivate: [RouteGuardService],
   },
   {
     path: 'project',
     component: ViewProjectsComponent,
-    // canActivate: [RouteGuardService],
+    canActivate: [RouteGuardService],
   },
   {
     path: 'createNewProject',
     component: CreateProjectComponent,
-    // canActivate: [RouteGuardService],
+    canActivate: [RouteGuardService],
   },
   {
     path: 'project/:project-id',
     component: ProjectComponent,
-    // canActivate: [RouteGuardService],
+    canActivate: [RouteGuardService],
   },
   {
     path: 'project/:project-id/task/:task-id',
     component: ProjectComponent,
-    // canActivate: [RouteGuardService],
+    canActivate: [RouteGuardService],
   },
 ];
 
