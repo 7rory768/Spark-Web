@@ -6,10 +6,13 @@
         <input type="button" value="+ Create New Project" class="button" (click)="createProject()" />
     </div>
 
-    <button class="box" (click)="viewProject()">
-        <h1>Project Name</h1> 
-        <h3>Team Name</h3> 
-        <!-- <h4 class="mb-5 mt-5">Description</h4> -->
-    </button>
+    <li *ngFor="let project of projects">
+        <button class="box" (click)="viewProject()">
+            <h1>{{project.name}}</h1>
+            <h3>{{project.teamId}}</h3>
+            <!-- <h4 class="mb-5 mt-5">Description</h4> -->
+        </button>
+    </li>
+
 
 </div>

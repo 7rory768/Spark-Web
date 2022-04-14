@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Project } from 'src/app/objects/project';
+import { ProjectService, GetProjectsResponse} from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-viewProjects',
@@ -8,9 +9,18 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./viewProjects.component.scss']
 })
 export class ViewProjectsComponent implements OnInit {
-  constructor(private router: Router) { }
+  projects: Project[] | undefined;
+
+  constructor(private router: Router, private projectService: ProjectService) { }
 
   ngOnInit(): void {
+    this.projectService.attemptGetAll().subscribe({
+      next: (result: GetProjectsResponse) => {
+        if (result == GetProjectsResponse.Success) {
+          this.projects = this.projectService.getProjects();
+        }
+      },
+    });
   }
 
   createProject() {

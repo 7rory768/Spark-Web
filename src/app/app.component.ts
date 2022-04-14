@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
+import { RequestInterceptorService } from './services/request-interceptor.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private requestService: RequestInterceptorService
   ) {
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
