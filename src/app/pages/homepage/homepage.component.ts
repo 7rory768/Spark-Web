@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -11,11 +11,9 @@ export class HomepageComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  // TODO: validate enmail, save email field for the signup page
   signUp() {
-    this.router.navigateByUrl('/signup');
+    this.router.navigateByUrl('/signup?email=' + this.email);
   }
 }

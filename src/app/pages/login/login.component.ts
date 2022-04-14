@@ -11,20 +11,19 @@ export class LoginComponent implements OnInit {
   public username: string = '';
   public password: string = '';
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  // TODO: find and validate info from database.
   signIn() {
     this.userService.attemptLogin(this.username, this.password).subscribe({
       next: (result: LoginResponse) => {
         if (result == LoginResponse.Success) {
           this.router.navigateByUrl('/project');
         } else if (result == LoginResponse.UnknownUser) {
-          // TODO:
+          // TODO: if username does not exist, give an error
         } else if (result == LoginResponse.IncorrectPassword) {
-          // TODO:
+          // TODO: if user exists but password is wrong, give an error
         }
       },
     });
