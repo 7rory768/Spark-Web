@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { Project } from 'src/app/objects/project';
 import { Task } from 'src/app/objects/task';
 import { TaskList } from 'src/app/objects/tasklist';
+import { ProjectService } from 'src/app/services/project.service';
+import { TaskListService } from 'src/app/services/task-list.service';
 
 @Component({
   selector: 'app-project',
@@ -9,50 +12,26 @@ import { TaskList } from 'src/app/objects/tasklist';
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  project: Project;
+  project?: Project;
   @Input() selectedTask?: Task;
 
-  constructor() {
-    this.project = {
-      id: 1,
-      teamId: 1,
-      name: 'Project 1',
-      mgrUsername: 'rory',
-      taskLists: [],
-    };
+  constructor(
+    private projectService: ProjectService,
+    private taskListService: TaskListService,
+    private route: ActivatedRoute
+  ) {
+    route.paramMap.subscribe({
+      next: (params: ParamMap) => {
+        let projectId = parseInt(params.get('project-id')!);
 
-    let taskLists: TaskList[] = this.project.taskLists!;
+        this.project = projectService.getFromCache(projectId);
 
-    let taskId: number = 1;
-
-    for (
-      let taskListId = 1;
-      taskListId <= Math.floor(Math.random() * (10 - 5 + 1)) + 5;
-      taskListId++
-    ) {
-      let tasks: Task[] = [];
-      for (
-        let taskNum = 0;
-        taskNum < Math.floor(Math.random() * (12 - 3 + 1)) + 3;
-        taskNum++
-      ) {
-        tasks.push({
-          id: taskId,
-          projectId: 1,
-          listName: 'TaskList' + taskListId,
-          name: 'Task ' + taskId++,
-          description: 'Description',
-          priority: taskId,
+        let taskList = taskListService.getTaskLists(projectId).subscribe({
+          next: (taskLists: TaskList[]) =>
+            (this.project!.taskLists = taskLists),
         });
-      }
-
-      taskLists.push({
-        projectId: 1,
-        id: taskListId,
-        name: 'TaskList ' + taskListId,
-        tasks,
-      });
-    }
+      },
+    });
   }
 
   ngOnInit(): void {}

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class HttpService {
   constructor(private http: HttpClient) {}
 
-  public get(endpoint: string, body: any) {
+  public get(endpoint: string, body: any = {}) {
     return this.http.get(environment.apiUrl + endpoint, body);
   }
 

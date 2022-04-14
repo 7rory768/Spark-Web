@@ -27,6 +27,7 @@ export class ViewProjectsComponent implements OnInit {
   }
 
   viewProject(project: Project) {
-    this.router.navigate([ProjectComponent, { project }]);
+    this.projectService.cache(project);
+    this.router.navigateByUrl('/project/' + project.id);
   }
 }
