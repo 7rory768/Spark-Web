@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Label } from '../objects/label';
 import { Project } from '../objects/project';
 import { TaskList } from '../objects/tasklist';
 import { HttpService } from './http.service';
@@ -7,15 +8,16 @@ import { HttpService } from './http.service';
 @Injectable({
   providedIn: 'root',
 })
-export class TaskListService {
+export class LabelService {
   constructor(private http: HttpService) {}
 
-  public getTaskLists(project: Project | number): Subject<TaskList[]> {
-    let subject = new Subject<TaskList[]>();
+  public getLabels(project: Project | number): Subject<Label[]> {
+    let subject = new Subject<Label[]>();
 
     this.http
       .get(
-        'lists/' + (this.isProject(project) ? (project as Project).id : project)
+        'labels/' +
+          (this.isProject(project) ? (project as Project).id : project)
       )
       .subscribe({
         next: (response: any) => {
@@ -26,12 +28,10 @@ export class TaskListService {
     return subject;
   }
 
-  public moveTaskList(taskList: TaskList | any, newPosition: number) {
-    let subject = new Subject<TaskList>();
+  public createLabel(label: Label) {
+    let subject = new Subject<Label>();
 
-    taskList.newPosition = newPosition;
-
-    this.http.post('lists/move', taskList).subscribe({
+    this.http.post('labels/create', label).subscribe({
       next: (response: any) => {
         subject.next(response.value);
       },
@@ -40,22 +40,10 @@ export class TaskListService {
     return subject;
   }
 
-  public createTaskList(taskList: TaskList) {
-    let subject = new Subject<TaskList>();
-
-    this.http.post('lists/create', taskList).subscribe({
-      next: (response: any) => {
-        subject.next(response.value);
-      },
-    });
-
-    return subject;
-  }
-
-  public deleteTaskList(taskList: TaskList) {
+  public deleteLabel(label: Label) {
     let subject = new Subject<boolean>();
 
-    this.http.delete('lists/' + taskList.id).subscribe({
+    this.http.delete('labels/' + label.id).subscribe({
       next: (response: any) => {
         subject.next(response.state);
       },

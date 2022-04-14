@@ -19,9 +19,7 @@ export class AppComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     private router: Router,
-    private userService: UserService,
-    private httpService: HttpService,
-    private requestService: RequestInterceptorService
+    private userService: UserService
   ) {
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
