@@ -11,15 +11,26 @@ export class SignupComponent implements OnInit {
   public fName: string = '';
   public lName: string = '';
   public email: string = '';
+  public username: string = '';
   public password: string = '';
   public confirmPassword: string = '';
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { 
+    
+  }
 
   ngOnInit(): void { }
 
   // TODO: validate all the text fields and save info in database. if email already exists, do not make another account.
   signUp() {
-    this.router.navigateByUrl('/project');
+    this.userService.attemptRegister(this.username, this.fName, this.lName, this.password, this.email).subscribe({
+      next: (result: RegisterResponse) => {
+        if (result == RegisterResponse.Success && this.password === this.confirmPassword) {
+          this.router.navigateByUrl('/project');
+        } else if (result == RegisterResponse.UserAlreadyExist) {
+          // TODO:
+        }
+      },
+    });
   }
 }

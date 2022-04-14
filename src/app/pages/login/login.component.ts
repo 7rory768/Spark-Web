@@ -8,7 +8,7 @@ import { LoginResponse, UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public email: string = '';
+  public username: string = '';
   public password: string = '';
 
   constructor(private userService: UserService, private router: Router) {}
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   // TODO: find and validate info from database.
   signIn() {
-    this.userService.attemptLogin(this.email, this.password).subscribe({
+    this.userService.attemptLogin(this.username, this.password).subscribe({
       next: (result: LoginResponse) => {
         if (result == LoginResponse.Success) {
           this.router.navigateByUrl('/project');
