@@ -37,6 +37,7 @@ export class ProjectComponent implements OnInit {
         taskNum++
       ) {
         tasks.push({
+          id: taskId,
           projectId: 1,
           listName: 'TaskList' + taskListId,
           name: 'Task ' + taskId++,

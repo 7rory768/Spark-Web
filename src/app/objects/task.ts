@@ -1,6 +1,8 @@
 import { Checklist } from './checklist';
+import { User } from './user';
 
 export interface Task {
+  id: number;
   projectId: number;
   listName: string;
   name: string;
@@ -11,4 +13,5 @@ export interface Task {
   completed?: number;
   competionPoints?: number;
   checklists?: Checklist[];
+  assignedUsers?: User[];
 }

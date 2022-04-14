@@ -1,18 +1,21 @@
 <div class="projects">
-    <div class="flex w-100 h-8rem"></div>
+  <div class="flex w-100 h-8rem"></div>
 
-    <div class="flex">
-        <h1 class="title">Your Projects</h1>
-        <input type="button" value="+ Create New Project" class="button" (click)="createProject()" />
-    </div>
+  <div class="flex">
+    <h1 class="title">Your Projects</h1>
+    <input
+      type="button"
+      value="+ Create New Project"
+      class="button"
+      (click)="createProject()"
+    />
+  </div>
 
-    <li *ngFor="let project of projects">
-        <button class="box" (click)="viewProject()">
-            <h1>{{project.name}}</h1>
-            <h3>{{project.teamId}}</h3>
-            <!-- <h4 class="mb-5 mt-5">Description</h4> -->
-        </button>
-    </li>
-
-
+  <li *ngFor="let project of projects">
+    <button class="box" (click)="viewProject(project)">
+      <h1>{{ project.name }}</h1>
+      <h3>{{ project.teamId }}</h3>
+      <!-- <h4 class="mb-5 mt-5">Description</h4> -->
+    </button>
+  </li>
 </div>

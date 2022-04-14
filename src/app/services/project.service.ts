@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-// import * as internal from 'stream';
 import { Project } from '../objects/project';
 import { HttpService } from './http.service';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +9,7 @@ import { UserService } from './user.service';
 export class ProjectService {
   private allUserProjects: Project[] | undefined;
 
-  constructor(private http: HttpService, private userService: UserService) {
+  constructor(private http: HttpService) {
     console.log('projectservice constructor');
   }
 
@@ -22,8 +20,7 @@ export class ProjectService {
   attemptGetAll(): Subject<Project[]> {
     let subject = new Subject<Project[]>();
 
-    // TODO: http
-    console.log(this.userService.getUser());
+    // TODO: htt
     this.http.get('projects/viewProjects', {}).subscribe({
       next: (response: any) => {
         subject.next(response.value);

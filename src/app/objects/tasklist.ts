@@ -1,8 +1,8 @@
 import { Task } from './task';
 
 export interface TaskList {
+  id: number;
   projectId: number;
-  id: Number;
   name: string;
   tasks?: Task[];
 }
