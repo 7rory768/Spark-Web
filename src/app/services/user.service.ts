@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { User } from '../objects/user';
 import { HttpService } from './http.service';
 
@@ -12,9 +11,9 @@ import { HttpService } from './http.service';
 export class UserService {
   private user: User | undefined;
   public finishedLoadingFromCookie: boolean = false;
-  private userSubject: BehaviorSubject<User | undefined> = new BehaviorSubject<
+  private userSubject: ReplaySubject<User | undefined> = new ReplaySubject<
     User | undefined
-  >(undefined);
+  >(1);
 
   constructor(
     private http: HttpService,

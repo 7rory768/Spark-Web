@@ -30,17 +30,28 @@ export class ProjectService {
   attemptGetAll(): Subject<Project[]> {
     let subject = new Subject<Project[]>();
 
-    // TODO: htt
-    this.http.get('projects/viewProjects', {}).subscribe({
+    this.http.get('projects/viewProjects').subscribe({
       next: (response: any) => {
+        if (!response.value.taskLists) response.value.taskLists = [];
+
         subject.next(response.value);
         return response;
       },
-      // error: (error) => {
-      //   console.log('error', error);
-      //   return error;
-      // },
-      complete: () => {},
+    });
+
+    return subject;
+  }
+
+  get(id: number): Subject<Project> {
+    let subject = new Subject<Project>();
+
+    this.http.get('projects/' + id).subscribe({
+      next: (response: any) => {
+        if (!response.value.taskLists) response.value.taskLists = [];
+
+        subject.next(response.value);
+        return response;
+      },
     });
 
     return subject;
