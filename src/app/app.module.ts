@@ -37,7 +37,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule } from '@angular/forms';
-import {AutoCompleteModule} from 'primeng/autocomplete';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ProjectComponent } from './pages/project/project.component';
 import { TaskListComponent } from './components/tasklist/tasklist.component';
 import { TaskPreviewComponent } from './components/taskpreview/taskpreview.component';
@@ -48,6 +48,9 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.component';
 import { CreateProjectComponent } from './pages/createProject/createProject.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { TreeDragDropService } from 'primeng/api';
+import { TreeModule } from 'primeng/tree';
+import { DragDropModule } from 'primeng/dragdrop';
 import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
 
 @NgModule({
@@ -101,6 +104,8 @@ import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
     OverlayPanelModule,
     FormsModule,
     ProgressSpinnerModule,
+    TreeModule,
+    DragDropModule,
     AutoCompleteModule,
   ],
   providers: [
@@ -110,6 +115,7 @@ import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
       multi: true,
     },
     CookieService,
+    TreeDragDropService,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { Project } from '../objects/project';
 import { TaskList } from '../objects/tasklist';
 import { HttpService } from './http.service';
@@ -9,6 +9,12 @@ import { HttpService } from './http.service';
 })
 export class TaskListService {
   constructor(private http: HttpService) {}
+
+  private isMovingTaskLists: (Project | number)[] = [];
+
+  public isMovingTaskList(project: Project | number): boolean {
+    return this.isMovingTaskLists.includes(project);
+  }
 
   public getTaskLists(project: Project | number): Subject<TaskList[]> {
     let subject = new Subject<TaskList[]>();
@@ -21,12 +27,22 @@ export class TaskListService {
         next: (response: any) => {
           subject.next(response.value);
         },
+        error: (response) => {
+          subject.error(response.error);
+        },
       });
 
     return subject;
   }
 
+  public updateTaskList(taskList: TaskList): Promise<any> {
+    console.log('update task list');
+    return firstValueFrom(this.http.post('lists/update', taskList));
+  }
+
   public moveTaskList(taskList: TaskList | any, newPosition: number) {
+    this.isMovingTaskLists.push(taskList.projectId);
+
     let subject = new Subject<TaskList>();
 
     taskList.newPosition = newPosition;
@@ -34,22 +50,20 @@ export class TaskListService {
     this.http.post('lists/move', taskList).subscribe({
       next: (response: any) => {
         subject.next(response.value);
+        this.isMovingTaskLists.splice(
+          this.isMovingTaskLists.indexOf(taskList.projectId)
+        );
+      },
+      error: (response) => {
+        subject.error(response.error);
       },
     });
 
     return subject;
   }
 
-  public createTaskList(taskList: TaskList) {
-    let subject = new Subject<TaskList>();
-
-    this.http.post('lists/create', taskList).subscribe({
-      next: (response: any) => {
-        subject.next(response.value);
-      },
-    });
-
-    return subject;
+  public createTaskList(taskList: TaskList): Promise<any> {
+    return firstValueFrom(this.http.post('lists/create', taskList));
   }
 
   public deleteTaskList(taskList: TaskList) {
@@ -58,6 +72,9 @@ export class TaskListService {
     this.http.delete('lists/' + taskList.id).subscribe({
       next: (response: any) => {
         subject.next(response.state);
+      },
+      error: (response) => {
+        subject.error(response.error);
       },
     });
 

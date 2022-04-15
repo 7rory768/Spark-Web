@@ -1,7 +1,8 @@
+import { TreeNode } from 'primeng/api';
 import { Checklist } from './checklist';
 import { User } from './user';
 
-export interface Task {
+export interface Task extends TreeNode {
   id: number;
   projectId: number;
   listName: string;
