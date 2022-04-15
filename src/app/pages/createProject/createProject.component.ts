@@ -15,8 +15,8 @@ import { Subject } from 'rxjs';
 })
 export class CreateProjectComponent implements OnInit {
   public projectName: string = '';
-  public teamName: string = '';
-  public budget: number = 0;
+  public teamName: Team | undefined;
+  public budget: string = '0';
   public warningMsg: string = '';
 
 
@@ -45,11 +45,17 @@ export class CreateProjectComponent implements OnInit {
   // // TODO: add this info in the database and a new project will appear on the projects page.
   createProject() {
     let subject = new Subject<CreateResponse>();
-    let _teamId = this.teams!.find((team) => team.name === this.teamName);
-    this.projectService.attemptCreateProject(_teamId!.id, this.projectName, this.budget).subscribe({
+    // let _teamId = this.teams!.find((team) => team.name === this.teamName);
+
+    console.log("teamName is: ", this.teamName);
+    console.log("teamName.id: ", this.teamName!.id);
+    console.log("project name is: ", this.projectName);
+    console.log("budget is: ", this.budget);
+    
+    this.projectService.attemptCreateProject(this.teamName!.id, this.projectName, Number(this.budget)).subscribe({
       next: (result: any) => {
         if (result == CreateResponse.Success) {
-          this.router.navigateByUrl('/project');
+          this.router.navigateByUrl('/projects');
         } else if (result == CreateResponse.NotManager) {
           this.warningMsg = "Invalid permissions: you are not a manager for the selected team."
         }
@@ -61,13 +67,18 @@ export class CreateProjectComponent implements OnInit {
     if (this.projectName == '') {
       this.warningMsg = "Project name empty. Please fill in the feild.";
     }
-    else if (this.teamName == '') {
-      this.warningMsg = "Team name empty. You must have a team before creating a project."
+    else if (isNumeric(this.budget) == false) {
+      this.warningMsg = "Budget invalid: please input a valid whole number.";
     }
     else {
+      this.warningMsg = "";
       this.createProject();
     }
   }
+}
+
+const isNumeric = (val: string) : boolean => {
+  return !isNaN(Number(val));
 }
 
 export enum CreateResponse{
