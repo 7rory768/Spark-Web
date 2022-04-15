@@ -7,23 +7,24 @@
             </div>
             <form>
                 <label class="w-full" for="projectName">Project Name</label>
-                <input pInputText class="w-full" [(ngModel)]="projectName" name="projectName" type="text" />
+                <input pInputText class="w-full" [(ngModel)]="projectName" name="pName" type="text" />
             </form>
             <form>
                 <label class="w-full" for="teamName">Team</label>
-                <p-dropdown class="w-full" [options]="teams" [(ngModel)]="teamName" optionLabel="name"></p-dropdown>
+                <p-dropdown class="w-full" [options]="teams" [(ngModel)]="teamName" optionLabel="name" [ngModelOptions]="{standalone: true}"></p-dropdown>
             </form>
             <form>
                 <label class="w-full" for="budget">Budget (to the nearest whole $)</label>
-                <input pInputText class="w-full" [(ngModel)]="budget" name="budget" type="text" />
+                <input pInputText class="w-full" [(ngModel)]="budget" name="bud" type="text" />
             </form>
             <!-- <form>
                 <label class="w-full" for="description">Description</label>
                 <textarea rows="5" pInputTextarea [autoResize]="true" class="w-full" [(ngModel)]="description"
                     name="description"></textarea>
             </form> -->
+            <p class="formWarning" >{{warningMsg}}</p>
             <div class="text-center">
-                <input pButton type="button" value="Create Project" class="button" (click)="createProject()" />
+                <input pButton type="button" value="Create Project" class="button" (click)="checkInput()" />
             </div>
         </div>
     </div>

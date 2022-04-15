@@ -27,6 +27,10 @@ export class TeamService {
     return this.cacheList.find((team) => team.id == id);
   }
 
+  getCacheList(){
+    return this.cacheList;
+  }
+
   attemptGetAll(): Subject<Team[]> {
     let subject = new Subject<Team[]>();
 
