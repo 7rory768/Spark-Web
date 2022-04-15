@@ -37,6 +37,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule } from '@angular/forms';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 import { ProjectComponent } from './pages/project/project.component';
 import { TaskListComponent } from './components/tasklist/tasklist.component';
 import { TaskPreviewComponent } from './components/taskpreview/taskpreview.component';
@@ -47,6 +48,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.component';
 import { CreateProjectComponent } from './pages/createProject/createProject.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
     TaskComponent,
     CreateProjectComponent,
     HomepageComponent,
+    CreateTeamComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +101,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
     OverlayPanelModule,
     FormsModule,
     ProgressSpinnerModule,
+    AutoCompleteModule,
   ],
   providers: [
     {
