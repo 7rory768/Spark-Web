@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { Project } from 'src/app/objects/project';
 import { Task } from 'src/app/objects/task';
@@ -15,6 +21,8 @@ import { UserService } from 'src/app/services/user.service';
 export class ProjectComponent implements OnInit {
   project?: Project;
   @Input() selectedTask?: Task;
+
+  draggedTaskList?: TaskList;
 
   addListView = false;
   newList: TaskList = {
@@ -60,14 +68,17 @@ export class ProjectComponent implements OnInit {
     this.loadTaskLists();
 
     this.newList.projectId = this.project!.id;
-    this.newList.position = this.project!.taskLists
-      ? this.project!.taskLists!.length
-      : 0;
   }
 
   loadTaskLists() {
     this.taskListService.getTaskLists(this.project!).subscribe({
-      next: (taskLists: TaskList[]) => (this.project!.taskLists = taskLists),
+      next: (taskLists: TaskList[]) => {
+        this.project!.taskLists = taskLists;
+
+        this.newList.position = this.project?.taskLists
+          ? this.project?.taskLists?.length
+          : 0;
+      },
     });
   }
 
@@ -78,7 +89,6 @@ export class ProjectComponent implements OnInit {
 
   onListCreate(taskList: TaskList) {
     this.addListView = false;
-
     this.project!.taskLists?.push(taskList);
 
     this.newList = {

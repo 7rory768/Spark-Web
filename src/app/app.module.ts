@@ -47,6 +47,9 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.component';
 import { CreateProjectComponent } from './pages/createProject/createProject.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { TreeDragDropService } from 'primeng/api';
+import { TreeModule } from 'primeng/tree';
+import { DragDropModule } from 'primeng/dragdrop';
 
 @NgModule({
   declarations: [
@@ -98,6 +101,8 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
     OverlayPanelModule,
     FormsModule,
     ProgressSpinnerModule,
+    TreeModule,
+    DragDropModule,
   ],
   providers: [
     {
@@ -106,6 +111,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
       multi: true,
     },
     CookieService,
+    TreeDragDropService,
   ],
   bootstrap: [AppComponent],
 })

@@ -37,11 +37,13 @@
           [ngStyle]="{
             'margin-right': '1rem'
           }"
+          [project]="project"
         ></app-tasklist>
         <app-tasklist
-          *ngFor="let taskList of project?.taskLists"
+          *ngFor="let taskList of project.taskLists"
           (onTaskSelect)="onSelectTask($event)"
           [taskList]="taskList"
+          [project]="project"
           [ngStyle]="{
             'margin-right':
               project === undefined ||

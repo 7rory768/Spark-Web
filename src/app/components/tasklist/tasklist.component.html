@@ -1,9 +1,80 @@
 <div
   class="flex flex-column align-items-center justify-content-center shadow-2 m-0 border-round w-16rem p-2 surface-200"
 >
-  <div *ngIf="!creation && taskList" style="text-align: center">
-    <h3>{{ taskList.name }}</h3>
-    <p>{{ taskList?.tasks ? taskList.tasks?.length : 0 }} tasks</p>
+  <div
+    *ngIf="!creation && taskList && project && project.taskLists"
+    class="w-full"
+  >
+    <div class="flex flex-row align-items-center justify-content-between">
+      <button
+        pButton
+        pRipple
+        icon="pi pi-arrow-left"
+        [loading]="isMovingThisTaskListLeft()"
+        class="p-button-text"
+        [disabled]="
+          taskList.position == 0 || isMovingTaskList() || disableAllButtons()
+        "
+        (click)="moveTaskList(taskList, -1)"
+      ></button>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-times"
+        class="p-button-danger p-button-text"
+        [disabled]="disableAllButtons()"
+        [loading]="deleting"
+        (click)="deleteTaskList(taskList)"
+      ></button>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-arrow-right"
+        [loading]="isMovingThisTaskListRight()"
+        class="p-button-text"
+        [disabled]="
+          taskList.position == project.taskLists.length - 1 ||
+          taskListService.isMovingTaskList(taskList.projectId) ||
+          disableAllButtons()
+        "
+        (click)="moveTaskList(taskList, 1)"
+      ></button>
+    </div>
+    <div style="text-align: center">
+      <h3
+        [ngStyle]="{ display: editingTaskListName ? 'none' : '' }"
+        (dblclick)="clickTaskListName(taskList)"
+      >
+        {{ taskList.name }}
+      </h3>
+
+      <div
+        class="p-inputgroup"
+        [ngStyle]="{ display: editingTaskListName ? '' : 'none' }"
+      >
+        <input
+          #nameinput
+          pInputText
+          type="text"
+          [(ngModel)]="newTaskListName"
+          placeholder="{{ taskList.name }}"
+        />
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-save"
+          styleClass="p-button-text"
+          (click)="renameTaskList()"
+          [loading]="updatingTaskList"
+          [disabled]="updatingTaskList"
+        ></button>
+      </div>
+      <p *ngIf="updatingNameError" [ngStyle]="{ color: 'var(--red-500)' }">
+        {{ updatingNameError }}
+      </p>
+      <p>{{ taskList.tasks ? taskList.tasks?.length : 0 }} tasks</p>
+    </div>
   </div>
 
   <div *ngIf="creation && taskList" style="text-align: center">
@@ -23,6 +94,9 @@
         (click)="createList()"
       ></button>
     </div>
+    <p *ngIf="creationError" [ngStyle]="{ color: 'var(--red-500)' }">
+      {{ creationError }}
+    </p>
   </div>
 
   <p-progressSpinner

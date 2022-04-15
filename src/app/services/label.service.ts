@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 import { Label } from '../objects/label';
 import { Project } from '../objects/project';
 import { TaskList } from '../objects/tasklist';
@@ -28,16 +28,12 @@ export class LabelService {
     return subject;
   }
 
-  public createLabel(label: Label) {
-    let subject = new Subject<Label>();
-
-    this.http.post('labels/create', label).subscribe({
-      next: (response: any) => {
-        subject.next(response.value);
-      },
-    });
-
-    return subject;
+  public createLabel(label: Label): Promise<Label> {
+    return firstValueFrom<Label>(
+      this.http
+        .post('labels/create', label)
+        .pipe((response: any) => response.value)
+    );
   }
 
   public deleteLabel(label: Label) {
