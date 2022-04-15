@@ -9,8 +9,10 @@ import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { Project } from 'src/app/objects/project';
 import { Task } from 'src/app/objects/task';
 import { TaskList } from 'src/app/objects/tasklist';
+import { Team } from 'src/app/objects/team';
 import { ProjectService } from 'src/app/services/project.service';
 import { TaskListService } from 'src/app/services/task-list.service';
+import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -36,6 +38,7 @@ export class ProjectComponent implements OnInit {
     private projectService: ProjectService,
     private userService: UserService,
     private taskListService: TaskListService,
+    private teamService: TeamService,
     private route: ActivatedRoute
   ) {}
 
@@ -66,6 +69,14 @@ export class ProjectComponent implements OnInit {
 
   onLoadedProject() {
     this.loadTaskLists();
+
+    this.teamService.attemptGetAll().subscribe({
+      next: (result: Team[]) => {
+        this.project!.team = result.find(
+          (team) => team.id === this.project!.teamId
+        );
+      },
+    });
 
     this.newList.projectId = this.project!.id;
   }
@@ -98,6 +109,8 @@ export class ProjectComponent implements OnInit {
       position: this.project!.taskLists!.length,
     };
   }
+
+  onListDelete(taskList: TaskList) {}
 
   // TODO: goes to a floating page to invite others
   inviteMember() {}
