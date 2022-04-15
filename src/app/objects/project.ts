@@ -1,4 +1,5 @@
 import { TaskList } from './tasklist';
+import { Team } from './team';
 
 export interface Project {
   id: number;
@@ -6,4 +7,5 @@ export interface Project {
   name: string;
   mgrUsername: string;
   taskLists?: TaskList[];
+  team?: Team;
 }
