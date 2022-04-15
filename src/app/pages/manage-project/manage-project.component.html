@@ -1,0 +1,45 @@
+<div class="profile">
+    <div class="profile-nav flex w-100 h-15rem text-center">
+        <h1> Manage Project </h1>
+    </div>
+
+    <div class="flex align-content-center justify-content-center">
+        <div *ngIf="project" class="pad p-4 shadow-2 border-round surface-card">
+            <div class="text-center mb-5">
+                <div class="header">Project Details</div>
+            </div>
+            <button class="box">
+                <h1>{{ project.name }}</h1>
+                <h2 class="underline"> {{project.team?.name}}</h2>
+                <h4> Budget = {{project.budget }}</h4>
+                <h5 class="italic-p"> created by @{{project.team?.mgrUsername}}</h5>
+            </button>
+            <form>
+                <label class="w-full" for="projectName">Project Name</label>
+                <input pInputText class="w-full" [(ngModel)]="projectName" name="pName" type="text" />
+            </form>
+            <form>
+                <label class="w-full" for="teamName">Team</label>
+                <p-dropdown class="w-full" [options]="teams" [(ngModel)]="teamName" optionLabel="name"
+                    [ngModelOptions]="{standalone: true}"></p-dropdown>
+            </form>
+            <form>
+                <label class="w-full" for="budget">Budget (to the nearest whole $)</label>
+                <input pInputText class="w-full" [(ngModel)]="budget" name="bud" type="text" />
+            </form>
+            <div class="text-center">
+                <input pButton type="button" value="Save Changes" class="button" (click)="save()" />
+                <input pButton type="button" value="Delete Board" class="button" (click)="showConfirmation()" />
+                <p-dialog header="Manage Project" [(visible)]="displayConfirm" header="Header"
+                    [(visible)]="displayConfirm" [style]="{ width: '50vw' }">
+                    <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-check" (click)=delete() label="Yes"
+                            styleClass="p-button-text"></p-button>
+                        <p-button icon="pi pi-times" (click)="displayConfirm = false" label="No"></p-button>
+                    </ng-template>
+
+                </p-dialog>
+            </div>
+        </div>
+    </div>
+</div>

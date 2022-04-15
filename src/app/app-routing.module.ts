@@ -9,6 +9,7 @@ import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.compone
 import { CreateProjectComponent } from './pages/createProject/createProject.component';
 import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
 import { RouteGuardService } from './services/route-guard.service';
+import { ManageProjectComponent } from './pages/manage-project/manage-project.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -43,6 +44,11 @@ const routes: Routes = [
   {
     path: 'project/:project-id/task/:task-id',
     component: ProjectComponent,
+    canActivate: [RouteGuardService],
+  },
+  {
+    path: 'project/:project-id/manageProject',
+    component: ManageProjectComponent,
     canActivate: [RouteGuardService],
   },
 ];
