@@ -68,7 +68,7 @@
     <!-- ASSIGNED USERS AVATARS -->
     <p-avatarGroup
       class="flex align-content-center mr-3"
-      style="margin-top: 0.5rem"
+      [style]="{ 'margin-top': '0.5rem' }"
     >
       <p-avatar
         *ngFor="let user of task.assignedUsers"
@@ -109,6 +109,13 @@
     <div></div>
     <div *ngIf="!creatingTask">
       <!-- CHECKLISTS -->
+      <button
+        pButton
+        class="p-button-text"
+        label="New Checklist"
+        icon="pi pi-plus"
+      ></button>
+      <div *ngFor="let checklist of task.checklists"></div>
       <h3>Checklist 1</h3>
       <p-checkbox
         class="w-full"
