@@ -1,10 +1,33 @@
 <div
   class="flex flex-column align-items-center justify-content-center shadow-2 m-0 border-round w-16rem p-2 surface-200"
 >
-  <div style="text-align: center">
-    <h3>{{ taskList?.name }}</h3>
-    <p>{{ taskList?.tasks?.length }} tasks</p>
+  <div *ngIf="!creation && taskList" style="text-align: center">
+    <h3>{{ taskList.name }}</h3>
+    <p>{{ taskList?.tasks ? taskList.tasks?.length : 0 }} tasks</p>
   </div>
+
+  <div *ngIf="creation && taskList" style="text-align: center">
+    <div class="p-inputgroup">
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="taskList.name"
+        placeholder="List Name"
+      />
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-check"
+        styleClass="p-button-success"
+        (click)="createList()"
+      ></button>
+    </div>
+  </div>
+
+  <p-progressSpinner
+    *ngIf="!creation && taskList && !taskList.tasks"
+  ></p-progressSpinner>
 
   <app-taskpreview
     *ngFor="let eachTask of taskList?.tasks"
