@@ -65,7 +65,7 @@ export class TeamService {
   attemptGetAllProjects(id: number): Subject<Project[]> {
     let subject = new Subject<Project[]>();
 
-    this.http.get('teams/project/' + id).subscribe({
+    this.http.get('projects/team/' + id).subscribe({
       next: (response: any) => {
         subject.next(response.value);
         return response;
@@ -73,5 +73,4 @@ export class TeamService {
     });
     return subject;
   }
-
 }
