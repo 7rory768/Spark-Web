@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { Project } from 'src/app/objects/project';
 import { Team } from 'src/app/objects/team';
@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ManageProjectComponent implements OnInit {
   public teams: Team[] = this.teamService.getCacheList();
-  public projects: Project[] | undefined;
+  // public projects: Project[] | undefined;
   public project: Project | undefined;
 
   // For the new data to save on modification
@@ -36,38 +36,38 @@ export class ManageProjectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getUserSubject().subscribe({
-      next: () => {
-        this.projectService.attemptGetAll().subscribe({
-          next: (result: Project[]) => {
-            this.projects = result;
-            if (this.teams) {
-              for (let p of this.projects) {
-                p.team = this.teams.find((team) => team.id === p.teamId)
-              }
-            }
-          },
-        });
-        this.teamService.attemptGetAll().subscribe({
-          next: (result: Team[]) => {
-            this.teams = result;
-            if (this.projects) {
-              for (let p of this.projects) {
-                p.team = this.teams.find((team) => team.id === p.teamId)
-              }
+    this.route.paramMap.subscribe({
+      next: (params: ParamMap) => {
+        let projectId = parseInt(params.get('project-id')!);
+
+        this.userService.getUserSubject().subscribe({
+          next: () => {
+            this.project = this.projectService.getFromCache(projectId);
+
+            if (!this.project) {
+              this.projectService.get(projectId).subscribe({
+                next: (project) => {
+                  this.project = project;
+                  this.onLoadedProject();
+                },
+              });
+            } else {
+              this.onLoadedProject();
             }
           },
         });
       },
     });
-    // First get the product id from the current route.
-    const routeParams = this.route.snapshot.paramMap;
-    const projectIdFromRoute = Number(routeParams.get('id'));
+  }
 
-    // Find the product that correspond with the id provided in route.
-    this.project = this.projects!.find(
-      (project) => project.id === projectIdFromRoute
-    );
+  onLoadedProject() {
+    this.teamService.attemptGetAll().subscribe({
+      next: (result: Team[]) => {
+        this.project!.team = result.find(
+          (team) => team.id === this.project!.teamId
+        );
+      },
+    });
   }
 
   checkInput() {
