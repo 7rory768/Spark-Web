@@ -28,6 +28,9 @@ export class ProjectService {
     return this.cacheList.find((project) => project.id == projectId);
   }
 
+  getCacheList(){
+    return this.cacheList;
+  }
   attemptGetAll(): Subject<Project[]> {
     let subject = new Subject<Project[]>();
 
@@ -58,28 +61,37 @@ export class ProjectService {
     return subject;
   }
 
-  // attemptCreateProject(
-  //   teamId: string,
-  //   name: string,
-  //   budget: number,
-  // ): Subject<RegisterResponse> {
-  //   let subject = new Subject<RegisterResponse>();
+  public createTask(task: Task) {
+    let subject = new Subject<Task>();
 
-  //   this.http
-  //     .post('projects/create', { teamId, name, budget })
-  //     .subscribe({
-  //       next: (response: any) => {
-  //         if (response.message == RegisterResponse.Success) {
-  //           this.user = response.value;
-  //           this.userSubject.next(this.user);
-  //           this.cookieService.set('spark-username', this.user!.username);
-  //         }
+    this.http.post('tasks/create', task).subscribe({
+      next: (response: any) => {
+        subject.next(response.value);
+      },
+    });
 
-  //         subject.next(response.message);
-  //         return response;
-  //       },
-  //     });
+    return subject;
+  }
 
-  //   return subject;
-  // }
+  attemptCreateProject(
+    teamId: number,
+    name: string,
+    budget: number,
+  ) {
+    let subject = new Subject<Project>();
+
+    this.http
+      .post('projects/create', { teamId, name, budget })
+      .subscribe({
+        next: (response: any) => {
+          subject.next(response.value);
+        },
+      });
+    return subject;
+  }
+}
+
+export enum RegisterResponse {
+  UserAlreadyExist = 'User already exists',
+  Success = 'User created successfully',
 }

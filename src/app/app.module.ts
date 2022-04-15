@@ -37,6 +37,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule } from '@angular/forms';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ProjectComponent } from './pages/project/project.component';
 import { TaskListComponent } from './components/tasklist/tasklist.component';
 import { TaskPreviewComponent } from './components/taskpreview/taskpreview.component';
@@ -50,6 +51,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { TreeDragDropService } from 'primeng/api';
 import { TreeModule } from 'primeng/tree';
 import { DragDropModule } from 'primeng/dragdrop';
+import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { DragDropModule } from 'primeng/dragdrop';
     TaskComponent,
     CreateProjectComponent,
     HomepageComponent,
+    CreateTeamComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,6 +106,7 @@ import { DragDropModule } from 'primeng/dragdrop';
     ProgressSpinnerModule,
     TreeModule,
     DragDropModule,
+    AutoCompleteModule,
   ],
   providers: [
     {

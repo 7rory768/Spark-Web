@@ -103,6 +103,29 @@ export class UserService {
 
     return subject;
   }
+
+  attemptSaveChanges(username: string, firstName: string, lastName: string, password: string, email: string): Subject<SaveResponse> {
+    let subject = new Subject<SaveResponse>();
+
+    // TODO: http
+    this.http.post('users/update', { username, firstName, lastName, password, email }).subscribe({
+      next: (response: any) => {
+        if ((response.message == SaveResponse.Success)) {
+          this.user = response.value;
+        }
+
+        subject.next(response.message);
+        return response;
+      },
+      // error: (error) => {
+      //   console.log('error', error);
+      //   return error;
+      // },
+      complete: () => { },
+    });
+
+    return subject;
+  }
 }
 
 export enum LoginResponse {
@@ -114,4 +137,9 @@ export enum LoginResponse {
 export enum RegisterResponse {
   UserAlreadyExist = 'User already exists',
   Success = 'User created successfully',
+}
+
+export enum SaveResponse {
+  Unsuccessful = 'User information unsuccessfully changed',
+  Success = 'User information successfully changed',
 }
