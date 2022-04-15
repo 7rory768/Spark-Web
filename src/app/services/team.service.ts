@@ -10,6 +10,7 @@ import { Project } from '../objects/project';
 })
 export class TeamService {
   private cacheList: Team[] = [];
+  private team: Team | undefined;
 
   constructor(private http: HttpService) {
     console.log('teamservice constructor');
@@ -73,4 +74,36 @@ export class TeamService {
     });
     return subject;
   }
+
+  attemptDeleteTeam(id: number): Subject<boolean> {
+    let subject = new Subject<boolean>();
+
+    this.http.delete('teams/delete/' + id).subscribe({
+      next: (response: any) => {
+        subject.next(response.state);
+        return response;
+      },
+    });
+    return subject;
+  }
+
+  attemptCreateTeam(name: string, mgrUsername: string): Subject<CreateResponse> {
+    let subject = new Subject<CreateResponse>();
+
+    this.http.post('teams/create', { name, mgrUsername }).subscribe({
+      next: (response: any) => {
+        if ((response.message == CreateResponse.Valid)) {
+          this.team = response.value;
+        }
+        subject.next(response.message);
+        return response;
+      },
+    });
+    return subject;
+  }
+}
+
+export enum CreateResponse {
+  Valid = 'Created team successfully',
+  Invalid = 'Failed to create team',
 }

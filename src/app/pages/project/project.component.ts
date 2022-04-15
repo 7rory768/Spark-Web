@@ -102,7 +102,6 @@ export class ProjectComponent implements OnInit {
   // TODO: goes to a floating page to invite others
   inviteMember() {}
 
-  // TODO: adds another list to the project
   addList() {
     this.addListView = true;
   }

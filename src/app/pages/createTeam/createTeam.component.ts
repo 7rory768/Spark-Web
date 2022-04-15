@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TeamService } from 'src/app/services/team.service';
+import { Team } from 'src/app/objects/team';
+import { User } from 'src/app/objects/user';
+import { CreateResponse, TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -23,21 +25,24 @@ export class CreateTeamComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getUserSubject().subscribe({
-      next: () => {
-        // this.teamService.attemptGetAll().subscribe({
-        //   next: (result: Team[]) => {
-        //     this.teams = result;
-        //   },
-        // });
+    this.userService.attemptgetAllUsers().subscribe({
+      next: (result: User[]) => {
+        for (let i = 0; i < result.length; i++) {
+          this.teamMembers[i] = result[i].username;
+          console.log(this.teamMembers[i]);
+        }
       },
     });
   }
 
-  filterTeamMembers(event: any) {
-  }
-
   createTeam() {
-    this.router.navigateByUrl('/profile');
+    this.teamService.attemptCreateTeam(this.teamName, this.mgrUsername).subscribe({
+      next: (result: CreateResponse) => {
+        if (result == CreateResponse.Valid) {
+          this.router.navigateByUrl('/profile');
+        } else if (result == CreateResponse.Invalid) {
+        }
+      },
+    });
   }
 }

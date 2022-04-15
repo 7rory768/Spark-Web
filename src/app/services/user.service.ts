@@ -126,6 +126,21 @@ export class UserService {
 
     return subject;
   }
+
+  attemptgetAllUsers(): Subject<User[]> {
+    let subject = new Subject<User[]>();
+
+    this.http.get('users/viewUsers').subscribe({
+      next: (response: any) => {
+        // if (!response.value.users) response.value.users = [];
+
+        subject.next(response.value);
+        return response;
+      },
+    });
+
+    return subject;
+  }
 }
 
 export enum LoginResponse {

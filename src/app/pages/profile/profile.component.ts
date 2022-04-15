@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   @Input() selectedTeam?: Team;
   public projects: Project[] = [];
   public teamMembers: User[] = [];
+  public deletedTeam: boolean = false;
 
   constructor(private userService: UserService, private router: Router, private teamService: TeamService) { }
 
@@ -90,6 +91,17 @@ export class ProfileComponent implements OnInit {
   editTeam() {
   }
 
-  deleteTeam() {
+  //TODO: need to reload the page to see the changes
+  deleteTeam() {    
+    this.userService.getUserSubject().subscribe({
+      next: () => {
+        this.teamService.attemptDeleteTeam(this.selectedTeam!.id).subscribe({
+          next: (result: boolean) => {
+            this.deletedTeam = result;
+            this.displayModal = false;
+          },
+        });
+      }
+    });
   }
 }
