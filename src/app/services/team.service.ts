@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Team } from '../objects/team';
+import { User } from '../objects/user';
 import { Observable, Subject } from 'rxjs';
 import { HttpService } from './http.service';
+import { Project } from '../objects/project';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class TeamService {
     return this.cacheList.find((team) => team.id == id);
   }
 
-  getCacheList(){
+  getCacheList() {
     return this.cacheList;
   }
 
@@ -44,8 +46,33 @@ export class TeamService {
       //   console.log('error', error);
       //   return error;
       // },
-      complete: () => {},
+      complete: () => { },
     });
     return subject;
   }
+
+  attemptGetAllMembers(id: number): Subject<User[]> {
+    let subject = new Subject<User[]>();
+
+    this.http.get('teams/' + id).subscribe({
+      next: (response: any) => {
+        subject.next(response.value);
+        return response;
+      },
+    });
+    return subject;
+  }
+
+  attemptGetAllProjects(id: number): Subject<Project[]> {
+    let subject = new Subject<Project[]>();
+
+    this.http.get('teams/project/' + id).subscribe({
+      next: (response: any) => {
+        subject.next(response.value);
+        return response;
+      },
+    });
+    return subject;
+  }
+
 }

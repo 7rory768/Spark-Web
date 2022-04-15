@@ -49,23 +49,29 @@
                 <input pButton type="button" value="+ Add Team" class="button small" (click)="createTeam()" />
             </div>
 
-            <button *ngFor="let team of teams" class="box w-full mb-5 profile" (click)="showTeamDetail()">
-                <!-- <h3>{{ team.name }}</h3> -->
-                <!-- <h4>created by @{{ team.mgrUsername }}</h4> -->
+            <button *ngFor="let team of teams" class="box w-full mb-5 profile" (click)="showTeamDetail(team)">
+                <h3>{{ team.name }}</h3>
+                <h4>Team Manager: @{{ team.mgrUsername }}</h4>
             </button>
-
-            <!-- <button class="box w-full mb-5 profile" (click)="showTeamDetail()">
-                <h3>Team Name</h3>
-                <h4>Joined Since XXXX</h4>
-            </button> -->
         </div>
     </div>
 </div>
 
-<p-dialog header="Team Name" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [draggable]="true"
-    [resizable]="true">
-    <p>
-    </p>
+<p-dialog header="{{ selectedTeam?.name }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '15vw'}"
+    [draggable]="true" [resizable]="true">
+    <div class="mb-5">
+        <h4>Members</h4>
+        <h5 *ngFor="let teamMember of teamMembers" class="">- @{{ teamMember.username }} </h5>
+    </div>
+    <div>
+        <h4>Projects</h4>
+        <h5 *ngFor="let project of projects" class="">- {{ project.name }} </h5>
+    </div>
+
     <ng-template pTemplate="footer">
+        <div class="flex">
+            <!-- <input pButton type="button" value="Edit Team" class="button" (click)="editTeam()" /> -->
+            <input pButton type="button" value="Delete Team" class="button" (click)="deleteTeam()" />
+        </div>
     </ng-template>
 </p-dialog>
