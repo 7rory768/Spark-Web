@@ -8,7 +8,8 @@
 
     <button *ngFor="let project of projects" class="box" (click)="viewProject(project)">
         <h1>{{ project.name }}</h1>
-        <!-- <h3> {{findTeamName(project.id)!.name}}</h3> -->
-        <h3> {{project.id}}</h3>
+        <h2 class="underline"> {{project.team!.name}}</h2>
+        <h4> Budget = {{project.budget | currency}}</h4>
+        <h5 class="italic-p"> created by @{{project.team!.mgrUsername}}</h5>
     </button>
 </div>

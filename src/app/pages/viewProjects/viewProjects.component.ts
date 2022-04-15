@@ -4,6 +4,8 @@ import { Project } from 'src/app/objects/project';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProjectComponent } from '../project/project.component';
+import { TeamService } from 'src/app/services/team.service';
+import { Team } from 'src/app/objects/team';
 
 @Component({
   selector: 'app-viewProjects',
@@ -12,12 +14,14 @@ import { ProjectComponent } from '../project/project.component';
 })
 export class ViewProjectsComponent implements OnInit {
   projects: Project[] | undefined;
+  teams: Team[] | undefined;
 
   constructor(
     private router: Router,
     private projectService: ProjectService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private teamService: TeamService
+  ) { }
 
   ngOnInit(): void {
     this.userService.getUserSubject().subscribe({
@@ -25,6 +29,21 @@ export class ViewProjectsComponent implements OnInit {
         this.projectService.attemptGetAll().subscribe({
           next: (result: Project[]) => {
             this.projects = result;
+            if (this.teams) {
+              for (let p of this.projects) {
+                p.team = this.teams.find((team) => team.id === p.teamId)
+              }
+            }
+          },
+        });
+        this.teamService.attemptGetAll().subscribe({
+          next: (result: Team[]) => {
+            this.teams = result;
+            if (this.projects) {
+              for (let p of this.projects) {
+                p.team = this.teams.find((team) => team.id === p.teamId)
+              }
+            }
           },
         });
       },
@@ -38,5 +57,9 @@ export class ViewProjectsComponent implements OnInit {
   viewProject(project: Project) {
     this.projectService.cache(project);
     this.router.navigateByUrl('/project/' + project.id);
+  }
+
+  findTeamName(teamid: number) {
+
   }
 }
