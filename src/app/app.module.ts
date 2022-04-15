@@ -48,10 +48,11 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ViewProjectsComponent } from './pages/viewProjects/viewProjects.component';
 import { CreateProjectComponent } from './pages/createProject/createProject.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
-import { TreeDragDropService } from 'primeng/api';
+import { ConfirmationService, TreeDragDropService } from 'primeng/api';
 import { TreeModule } from 'primeng/tree';
 import { DragDropModule } from 'primeng/dragdrop';
 import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
     TreeModule,
     DragDropModule,
     AutoCompleteModule,
+    CalendarModule,
   ],
   providers: [
     {
@@ -116,6 +118,7 @@ import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
     },
     CookieService,
     TreeDragDropService,
+    ConfirmationService,
   ],
   bootstrap: [AppComponent],
 })
