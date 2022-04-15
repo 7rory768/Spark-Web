@@ -45,19 +45,13 @@ export class CreateProjectComponent implements OnInit {
   // // TODO: add this info in the database and a new project will appear on the projects page.
   createProject() {
     let subject = new Subject<CreateResponse>();
-    // let _teamId = this.teams!.find((team) => team.name === this.teamName);
-
-    console.log("teamName is: ", this.teamName);
-    console.log("teamName.id: ", this.teamName!.id);
-    console.log("project name is: ", this.projectName);
-    console.log("budget is: ", this.budget);
-    
     this.projectService.attemptCreateProject(this.teamName!.id, this.projectName, Number(this.budget)).subscribe({
       next: (result: any) => {
-        if (result == CreateResponse.Success) {
-          this.router.navigateByUrl('/projects');
-        } else if (result == CreateResponse.NotManager) {
+        if (result == CreateResponse.NotManager) {
           this.warningMsg = "Invalid permissions: you are not a manager for the selected team."
+        }
+        else{
+          this.router.navigateByUrl('/project');
         }
       },
     });
@@ -66,6 +60,9 @@ export class CreateProjectComponent implements OnInit {
   checkInput() {
     if (this.projectName == '') {
       this.warningMsg = "Project name empty. Please fill in the feild.";
+    }
+    if (this.projectName.length > 20) {
+      this.warningMsg = "Project name cannot exceed 20 characters."
     }
     else if (isNumeric(this.budget) == false) {
       this.warningMsg = "Budget invalid: please input a valid whole number.";

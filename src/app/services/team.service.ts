@@ -37,7 +37,6 @@ export class TeamService {
     this.http.get('teams/viewTeams', {}).subscribe({
       next: (response: any) => {
         subject.next(response.value);
-        console.log('got teams', response.value)
         return response;
       },
       // error: (error) => {
