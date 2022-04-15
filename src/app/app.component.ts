@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
         this.nav =
           val.urlAfterRedirects !== '/project' &&
           val.urlAfterRedirects !== '/profile' &&
-          val.urlAfterRedirects !== '/createNewProject' &&
+          val.urlAfterRedirects !== '/createTeam' &&
+          val.urlAfterRedirects !== '/createProject' &&
           val.urlAfterRedirects !== '/project/:project-id' &&
           val.urlAfterRedirects !== '/project/:project-id/task/:task-id';
 

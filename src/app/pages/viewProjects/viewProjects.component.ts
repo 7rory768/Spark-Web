@@ -51,7 +51,7 @@ export class ViewProjectsComponent implements OnInit {
   }
 
   createProject() {
-    this.router.navigateByUrl('/createNewProject');
+    this.router.navigateByUrl('/createProject');
   }
 
   viewProject(project: Project) {
