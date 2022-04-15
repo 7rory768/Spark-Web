@@ -15,6 +15,7 @@ export class CreateProjectComponent implements OnInit {
   public projectName: string = '';
   public teamName: string = '';
   public teams: string[] = [];
+  public budget: number = 0;
   // public description: string = '';
 
   // public teams: Team[] | undefined;

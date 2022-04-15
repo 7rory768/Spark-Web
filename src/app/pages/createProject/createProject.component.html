@@ -5,7 +5,6 @@
                 <img src="../../../assets/images/icon/sparkles-64.png" alt="Image" height="50" class="mb-3" />
                 <div class="title">Create a New Project</div>
             </div>
-
             <form>
                 <label class="w-full" for="projectName">Project Name</label>
                 <input pInputText class="w-full" [(ngModel)]="projectName" name="projectName" type="text" />
@@ -13,6 +12,10 @@
             <form>
                 <label class="w-full" for="teamName">Team</label>
                 <p-dropdown class="w-full" [options]="teams" [(ngModel)]="teamName" optionLabel="name"></p-dropdown>
+            </form>
+            <form>
+                <label class="w-full" for="budget">Budget (to the nearest whole $)</label>
+                <input pInputText class="w-full" [(ngModel)]="budget" name="budget" type="text" />
             </form>
             <!-- <form>
                 <label class="w-full" for="description">Description</label>

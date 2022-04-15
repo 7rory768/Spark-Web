@@ -5,7 +5,8 @@ export interface Project {
   id: number;
   teamId: number;
   name: string;
-  mgrUsername: string;
+  budget: string;
+  // mgrUsername: string;
   taskLists?: TaskList[];
   team?: Team;
 }

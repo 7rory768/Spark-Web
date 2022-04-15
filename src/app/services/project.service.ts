@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+// import * as internal from 'stream';
 import { Project } from '../objects/project';
 import { HttpService } from './http.service';
 
@@ -30,7 +31,6 @@ export class ProjectService {
   attemptGetAll(): Subject<Project[]> {
     let subject = new Subject<Project[]>();
 
-    // TODO: htt
     this.http.get('projects/viewProjects', {}).subscribe({
       next: (response: any) => {
         subject.next(response.value);
@@ -45,4 +45,30 @@ export class ProjectService {
 
     return subject;
   }
+
+  // attemptCreateProject(
+  //   teamId: string,
+  //   name: string,
+  //   budget: number,
+  // ): Subject<RegisterResponse> {
+  //   let subject = new Subject<RegisterResponse>();
+
+  //   this.http
+  //     .post('projects/create', { teamId, name, budget })
+  //     .subscribe({
+  //       next: (response: any) => {
+  //         if (response.message == RegisterResponse.Success) {
+  //           this.user = response.value;
+  //           this.userSubject.next(this.user);
+  //           this.cookieService.set('spark-username', this.user!.username);
+  //         }
+
+  //         subject.next(response.message);
+  //         return response;
+  //       },
+  //     });
+
+  //   return subject;
+  // }
+
 }
