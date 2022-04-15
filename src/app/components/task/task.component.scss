@@ -1,0 +1,21 @@
+div::ng-deep {
+  .p-multiselect-label-container,
+  .p-multiselect {
+    width: 100%;
+    min-width: 50%;
+  }
+  p-inputnumber {
+    width: 100%;
+    span.p-inputnumber {
+      width: 100%;
+    }
+  }
+
+  span.p-calendar {
+    width: 100%;
+  }
+}
+
+label {
+  font-weight: bold;
+}

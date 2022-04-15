@@ -43,6 +43,8 @@ export class TaskListComponent implements OnInit {
   updatingTaskList = false;
   updatingNameError = '';
 
+  creatingTask = false;
+
   constructor(
     public taskListService: TaskListService,
     private taskService: TaskService,
@@ -157,6 +159,11 @@ export class TaskListComponent implements OnInit {
 
   renameTaskList() {
     if (this.editingTaskListName) {
+      if (this.newTaskListName === '') {
+        this.updatingNameError = 'Your list cannot have an empty name';
+        return;
+      }
+
       this.updatingTaskList = true;
       let oldName = this.editingTaskListName.name;
 
@@ -201,6 +208,10 @@ export class TaskListComponent implements OnInit {
       });
   }
 
+  createNewTask() {
+    this.creatingTask = true;
+  }
+
   disableAllButtons() {
     return this.deleting || this.movingThisList || this.updatingTaskList;
   }
@@ -226,5 +237,9 @@ export class TaskListComponent implements OnInit {
 
   select(task: Task) {
     this.onTaskSelect.emit(task);
+  }
+
+  onCancelTaskCreation() {
+    this.creatingTask = false;
   }
 }

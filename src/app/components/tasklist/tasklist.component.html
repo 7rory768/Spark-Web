@@ -60,6 +60,7 @@
           placeholder="{{ taskList.name }}"
         />
         <button
+          #namesavebutton
           type="button"
           pButton
           pRipple
@@ -74,8 +75,22 @@
         {{ updatingNameError }}
       </p>
       <p>{{ taskList.tasks ? taskList.tasks?.length : 0 }} tasks</p>
+      <button
+        pButton
+        icon="pi pi-plus"
+        label="New Task"
+        (click)="createNewTask()"
+      ></button>
     </div>
   </div>
+
+  <app-task
+    *ngIf="creatingTask"
+    [project]="project"
+    [taskList]="taskList"
+    [creatingTask]="true"
+    (onHide)="onCancelTaskCreation()"
+  ></app-task>
 
   <div *ngIf="creation && taskList" style="text-align: center">
     <div class="p-inputgroup">

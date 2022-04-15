@@ -1,1 +1,159 @@
-<p>task works!</p>
+<p-confirmDialog
+  header="Error"
+  icon="pi pi-exclamation-triangle"
+  [rejectVisible]="false"
+  [acceptVisible]="false"
+></p-confirmDialog>
+
+<p-dialog
+  [(visible)]="task"
+  header="{{ task?.name }}"
+  [style]="{ width: '40vw', height: '80vw', color: 'black' }"
+  (onHide)="onHide.emit()"
+  [modal]="true"
+>
+  <ng-template pTemplate="header">
+    <div
+      *ngIf="creatingTask && task"
+      class="w-full"
+      style="margin-right: 0.5rem"
+    >
+      <input
+        pInputText
+        type="text"
+        class="w-full"
+        [(ngModel)]="task.name"
+        placeholder="Task Name"
+      />
+    </div>
+    <div *ngIf="!creatingTask && task">
+      <h2>{{ task.name }}</h2>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      label="{{ creatingTask ? 'Create' : 'Save' }}"
+      icon="pi {{ creatingTask ? 'pi-check' : 'pi-save' }}"
+      [loading]="saving"
+      (click)="creatingTask ? createTask() : saveTask()"
+    ></button>
+  </ng-template>
+  <div *ngIf="task">
+    <!-- DESCRIPTION -->
+    <label>Description</label>
+    <textarea
+      pInputTextarea
+      [(ngModel)]="task.description"
+      style="min-height: 4rem"
+      placeholder="Description here"
+      [autoResize]="true"
+      class="w-full"
+      [rows]="2"
+      [cols]="30"
+    ></textarea>
+    <!-- ASSIGNED USERS -->
+    <label style="margin-top: 2rem">Assigned Users</label>
+    <p-multiSelect
+      [options]="teamUsers"
+      [(ngModel)]="task.assignedUsers"
+      optionLabel="fullName"
+      optionValue="user"
+      [dropdownIcon]="
+        !teamUsers ? 'pi pi-spin pi-spinner' : 'pi pi-chevron-down'
+      "
+      class="w-full"
+      appendTo="body"
+    ></p-multiSelect>
+    <!-- ASSIGNED USERS AVATARS -->
+    <p-avatarGroup
+      class="flex align-content-center mr-3"
+      style="margin-top: 0.5rem"
+    >
+      <p-avatar
+        *ngFor="let user of task.assignedUsers"
+        label="{{ getInitials(user) }}"
+        shape="circle"
+        color="bg-blue-500"
+      ></p-avatar>
+    </p-avatarGroup>
+    <div class="w-full">
+      <div class="flex justify-content-between">
+        <div style="width: 47%" *ngIf="isManager()">
+          <!-- COMPLETION POINTS - MANAGER ONLY -->
+          <span class="w-full">
+            <label class="w-full">Completion Points</label>
+          </span>
+          <p-inputNumber
+            [(ngModel)]="task.completionPoints"
+            [min]="0"
+            [showButtons]="true"
+          ></p-inputNumber>
+        </div>
+        <!-- DISABLED IF NOT MANAGER -->
+        <div [ngStyle]="{ width: isManager() ? '47%' : '100%' }">
+          <!-- DEADLINE -->
+          <div class="w-full">
+            <label class="w-full">Deadline</label>
+          </div>
+          <p-calendar
+            [(ngModel)]="task.deadline"
+            [showButtonBar]="true"
+            [showIcon]="true"
+            [disabled]="!isManager()"
+            appendTo="body"
+          ></p-calendar>
+        </div>
+      </div>
+    </div>
+    <div></div>
+    <div *ngIf="!creatingTask">
+      <!-- CHECKLISTS -->
+      <h3>Checklist 1</h3>
+      <p-checkbox
+        class="w-full"
+        name="groupname"
+        value="Complete Frontend"
+        label="Complete Frontend"
+      ></p-checkbox>
+      <p-checkbox
+        class="w-full"
+        name="groupname"
+        value="Complete Frontend"
+        label="Complete Backend"
+        >Complete Backend
+      </p-checkbox>
+      <h3>Comments</h3>
+      <div class="flex">
+        <div class="flex">
+          <p-avatar label="RS" shape="circle"></p-avatar>
+        </div>
+        <div class="flex flex-grow-1">
+          <input
+            pInputText
+            id="comment-input"
+            class="w-full"
+            type="text"
+            style="margin-left: 1rem"
+            placeholder="Enter a new comment here..."
+          />
+        </div>
+      </div>
+      <div class="flex">
+        <div class="flex">
+          <p-avatar label="LB" shape="circle"></p-avatar>
+        </div>
+        <div class="flex align-content-end">
+          <p class="m-0 align-self-end bold-1" style="padding-left: 1rem">
+            Lauraine Baffot
+          </p>
+        </div>
+      </div>
+      <div class="flex m-2">
+        <div class="flex surface-card shadow-2 border-round">
+          <p style="margin: 1rem">This project sure is coming along nicely</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

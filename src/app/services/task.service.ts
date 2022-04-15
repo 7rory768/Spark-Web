@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 import { Task } from '../objects/task';
 import { TaskList } from '../objects/tasklist';
 import { HttpService } from './http.service';
@@ -82,15 +82,7 @@ export class TaskService {
   }
 
   public createTask(task: Task) {
-    let subject = new Subject<Task>();
-
-    this.http.post('tasks/create', task).subscribe({
-      next: (response: any) => {
-        subject.next(response.value);
-      },
-    });
-
-    return subject;
+    return firstValueFrom(this.http.post('tasks/create', task));
   }
 
   public deleteTask(task: Task) {
