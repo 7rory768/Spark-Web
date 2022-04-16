@@ -110,14 +110,25 @@ export class ManageProjectComponent implements OnInit {
 
   delete() {
     this.displayConfirm = false;
-    // delete from database
-    this.router.navigateByUrl('/project');
+    // let subject = new Subject<Project>();
+    this.projectService.attemptDelete(this.project!.id, this.teamName!.id).subscribe({
+      next: (result: Boolean) => {
+        if (result == true) {
+          this.router.navigateByUrl('/project');
+        }
+        else {
+          this.warningMsg = "Failure to delete project..."
+        }
+      },
+    });
   }
 
   showConfirmation() {
     this.displayConfirm = true;
   }
 }
+
 const isNumeric = (val: string): boolean => {
   return !isNaN(Number(val));
 }
+

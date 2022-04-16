@@ -107,6 +107,21 @@ export class ProjectService {
       });
     return subject;
   }
+  attemptDelete(
+    projectId: number,
+    teamId: number,
+  ){
+    let subject = new Subject<Boolean>();
+
+    this.http
+      .post('projects/delete', { projectId, teamId})
+      .subscribe({
+        next: (response: any) => {
+          subject.next(response.value);
+        },
+      });
+    return subject;
+  }
 }
 
 export enum RegisterResponse {
