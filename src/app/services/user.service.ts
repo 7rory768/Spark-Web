@@ -136,7 +136,7 @@ export class UserService {
   attemptgetAllUsers(): Subject<User[]> {
     let subject = new Subject<User[]>();
 
-    this.http.get('users/viewUsers').subscribe({
+    this.http.get('users').subscribe({
       next: (response: any) => {
         // if (!response.value.users) response.value.users = [];
 

@@ -12,15 +12,14 @@ import { Project } from 'src/app/objects/project';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
-  public fName: string = '';
-  public lName: string = '';
-  public username: string = '';
-  public point: string = '';
-  public email: string = '';
-  public password: string = '';
+export class ProfileComponent implements OnInit { 
+  public fName: string = this.userService.getUser()!.fName;
+  public lName: string = this.userService.getUser()!.lName;
+  public username: string = this.userService.getUser()!.username;
+  public email: string = this.userService.getUser()!.email;
+  public password: string = this.userService.getUser()!.password;
+  public totalPoints: number = 0;
   public displayModal: boolean = false;
-  // public userInfo: User | undefined;
   public teams: Team[] | undefined;
   @Input() selectedTeam?: Team;
   public projects: Project[] = [];

@@ -5,7 +5,7 @@
             <div class="text-white">
                 <h1>{{fName}} {{lName}}</h1>
             </div>
-            <!-- <h3>@{{userInfo.username}}</h3> -->
+            <h3>@{{username}}</h3>
             <h3>Total Points: XXXX</h3>
         </div>
     </div>
@@ -34,9 +34,9 @@
                 <input pInputText class="w-full" [(ngModel)]="email" name="email" type="email" placeholder={{email}} />
             </form>
             <form>
-                <label class="w-full" for="password">Password</label>
+                <label class="w-full" for="password">New Password</label>
                 <p-password class="w-full" [(ngModel)]="password" name="password" type="password" [feedback]="false"
-                    [toggleMask]="true" placeholder={{password}}></p-password>
+                    [toggleMask]="true"></p-password>
             </form>
             <div class="text-center">
                 <input pButton type="button" value="Save Changes" class="button" (click)="save()" />

@@ -87,15 +87,30 @@ export class TeamService {
     return subject;
   }
 
-  attemptCreateTeam(name: string, mgrUsername: string): Subject<CreateResponse> {
-    let subject = new Subject<CreateResponse>();
+  attemptCreateTeam(name: string, mgrUsername: string): Subject<Team> {
+    let subject = new Subject<Team>();
 
     this.http.post('teams/create', { name, mgrUsername }).subscribe({
       next: (response: any) => {
-        if ((response.message == CreateResponse.Valid)) {
-          this.team = response.value;
-        }
-        subject.next(response.message);
+        // if ((response.message == CreateResponse.Valid)) {
+        //   this.team = response.value;
+        // }
+        subject.next(response.value);
+        return response;
+      },
+    });
+    return subject;
+  }
+
+  attemptAddMembers(id: number, selectedMembers: string): Subject<boolean> {
+    let subject = new Subject<boolean>();
+
+    this.http.post('teams/addMember', { id, selectedMembers }).subscribe({
+      next: (response: any) => {
+        // if ((response.message == CreateResponse.Valid)) {
+        //   this.team = response.value;
+        // }
+        subject.next(response.state);
         return response;
       },
     });

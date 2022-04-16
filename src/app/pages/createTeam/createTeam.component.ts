@@ -12,10 +12,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CreateTeamComponent implements OnInit {
   public teamName: string = '';
-  public mgrUsername: string = '';
-  public selectedMembers: string[] = [];
+  public mgrUsername: string = this.userService.getUser()!.username;
+  public selectedMembers = [];
   public teamMembers: string[] = [];
-  public projects: string[] = [];
+  // public projects: string[] = [];
 
   constructor(
     private router: Router,
@@ -29,19 +29,23 @@ export class CreateTeamComponent implements OnInit {
       next: (result: User[]) => {
         for (let i = 0; i < result.length; i++) {
           this.teamMembers[i] = result[i].username;
-          console.log(this.teamMembers[i]);
         }
       },
     });
+
   }
 
   createTeam() {
+    // for (const member of this.selectedMembers) {
+    //   console.log("Selected team member" + member);
+    // }
     this.teamService.attemptCreateTeam(this.teamName, this.mgrUsername).subscribe({
-      next: (result: CreateResponse) => {
-        if (result == CreateResponse.Valid) {
-          this.router.navigateByUrl('/profile');
-        } else if (result == CreateResponse.Invalid) {
+      next: (result: Team) => {
+        for (const member of this.selectedMembers) {
+          console.log(member);
+          this.teamService.attemptAddMembers(result.id, String(member)).subscribe({});
         }
+        this.router.navigateByUrl('/profile');
       },
     });
   }
