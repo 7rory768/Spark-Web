@@ -89,6 +89,39 @@ export class ProjectService {
       });
     return subject;
   }
+
+  attemptUpdateProject(
+    projectId: number,
+    teamId: number,
+    name: string,
+    budget: number
+  ){
+    let subject = new Subject<Project>();
+
+    this.http
+      .post('projects/update', { projectId, teamId, name, budget })
+      .subscribe({
+        next: (response: any) => {
+          subject.next(response.value);
+        },
+      });
+    return subject;
+  }
+  attemptDelete(
+    projectId: number,
+    teamId: number,
+  ){
+    let subject = new Subject<Boolean>();
+
+    this.http
+      .post('projects/delete', { projectId, teamId})
+      .subscribe({
+        next: (response: any) => {
+          subject.next(response.value);
+        },
+      });
+    return subject;
+  }
 }
 
 export enum RegisterResponse {
