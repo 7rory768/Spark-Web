@@ -1,55 +1,120 @@
-<div id="navcard" class="card" *ngIf="showNavBeforeLogIn()">
-  <div class="flex w-100 h-4rem bg-primary border-round shadow-2" style="position: fixed"
-    [ngStyle]="{ width: navWidth }">
-    <div
-      class="flex align-items-center justify-content-center w-12rem h-full bg-blue-500 font-bold text-white border-round p-2">
-      <img src="../assets/images/icon/sparkles-48.png" />
+<div class="project card h-4rem">
+  <div id="navcard" class="flex w-100 h-4rem">
+    <div class="card" *ngIf="showNavBeforeLogIn()">
       <div
-        class="flex align-items-center justify-content-center w-20rem h-full bg-blue-500 font-bold text-white border-round p-2">
-        <h1>Spark</h1>
+        class="flex w-100 h-4rem bg-primary border-round shadow-2"
+        style="position: fixed"
+        [ngStyle]="{ width: navWidth }"
+      >
+        <div
+          class="flex align-items-center justify-content-center w-12rem h-full bg-blue-500 font-bold text-white border-round p-2"
+        >
+          <img src="../assets/images/icon/sparkles-48.png" />
+          <div
+            class="flex align-items-center justify-content-center w-20rem h-full bg-blue-500 font-bold text-white border-round p-2"
+          >
+            <h1>Spark</h1>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-grow-1 align-items-center justify-content-end w-8rem h-full bg-blue-500 font-bold text-white border-round p-2"
+        >
+          <button
+            pButton
+            class="bold-1 mr-3"
+            type="button"
+            label="Log In"
+            (click)="navigate('/login')"
+          ></button>
+          <button
+            pButton
+            class="bold-1"
+            type="button"
+            label="Sign Up"
+            (click)="navigate('/signup')"
+          ></button>
+        </div>
       </div>
     </div>
 
-    <div
-      class="flex flex-grow-1 align-items-center justify-content-end w-8rem h-full bg-blue-500 font-bold text-white border-round p-2">
-      <button pButton class="bold-1 mr-3" type="button" label="Log In" (click)="navigate('/login')"></button>
-      <button pButton class="bold-1" type="button" label="Sign Up" (click)="navigate('/signup')"></button>
+    <div id="navcard" class="card" *ngIf="showNavAfterLogIn()">
+      <div
+        class="flex w-100 h-4rem bg-primary border-round shadow-2"
+        style="position: fixed"
+        [ngStyle]="{ width: navWidth }"
+      >
+        <div
+          class="flex align-items-center justify-content-center w-12rem h-full bg-blue-500 font-bold text-white border-round p-2"
+        >
+          <img src="../assets/images/icon/sparkles-48.png" />
+          <div
+            class="flex align-items-center justify-content-center w-20rem h-full bg-blue-500 font-bold text-white border-round p-2"
+          >
+            <h1>Spark</h1>
+          </div>
+        </div>
+
+        <div
+          class="flex align-items-center justify-content-center w-35rem h-full bg-blue-500 font-bold text-white border-round p-2"
+        >
+          <button
+            pButton
+            class="bold-1 w-8rem mr-5"
+            type="button"
+            label="Projects"
+            (click)="navigate('/project')"
+          ></button>
+          <button
+            pButton
+            class="bold-1 w-8rem mr-5"
+            type="button"
+            label="New Project"
+            (click)="navigate('/createProject')"
+          ></button>
+          <button
+            pButton
+            class="bold-1 w-8rem mr-5"
+            type="button"
+            label="New Team"
+            (click)="navigate('/createTeam')"
+          ></button>
+          <button
+            pButton
+            class="bold-1 w-8rem mr-5"
+            type="button"
+            label="Profile"
+            (click)="navigate('/profile')"
+          ></button>
+          <button
+            pButton
+            class="bold-1 w-8rem mr-5"
+            type="button"
+            label="Log Out"
+            (click)="navigate('/login')"
+          ></button>
+        </div>
+
+        <!-- TODO: Actually search for projects -->
+        <div
+          class="flex flex-grow-1 align-items-center justify-content-end h-full bg-blue-500 font-bold text-white border-round p-2"
+        >
+          <span class="p-input-icon-right">
+            <i class="pi pi-search text-white"></i>
+            <input
+              pInputText
+              class="w-full"
+              name="searchProject"
+              type="text"
+              placeholder="Search Project"
+            />
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div id="navcard" class="card" *ngIf="showNavAfterLogIn()">
-  <div class="flex w-100 h-4rem bg-primary border-round shadow-2" style="position: fixed"
-    [ngStyle]="{ width: navWidth }">
-    <div
-      class="flex align-items-center justify-content-center w-12rem h-full bg-blue-500 font-bold text-white border-round p-2">
-      <img src="../assets/images/icon/sparkles-48.png" />
-      <div
-        class="flex align-items-center justify-content-center w-20rem h-full bg-blue-500 font-bold text-white border-round p-2">
-        <h1>Spark</h1>
-      </div>
-    </div>
-
-    <div
-      class="flex align-items-center justify-content-center w-35rem h-full bg-blue-500 font-bold text-white border-round p-2">
-      <button pButton class="bold-1 w-8rem mr-5" type="button" label="Projects" (click)="navigate('/project')"></button>
-      <button pButton class="bold-1 w-8rem mr-5" type="button" label="New Project"
-        (click)="navigate('/createProject')"></button>
-        <button pButton class="bold-1 w-8rem mr-5" type="button" label="New Team"
-        (click)="navigate('/createTeam')"></button>
-      <button pButton class="bold-1 w-8rem mr-5" type="button" label="Profile" (click)="navigate('/profile')"></button>
-      <button pButton class="bold-1 w-8rem mr-5" type="button" label="Log Out" (click)="navigate('/login')"></button>
-    </div>
-
-    <!-- TODO: Actually search for projects -->
-    <div
-      class="flex flex-grow-1 align-items-center justify-content-end h-full bg-blue-500 font-bold text-white border-round p-2">
-      <span class="p-input-icon-right ">
-        <i class="pi pi-search text-white"></i>
-        <input pInputText class="w-full" name="searchProject" type="text" placeholder="Search Project" />
-      </span>
-    </div>
-  </div>
+<div class="app-div">
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>

@@ -44,6 +44,9 @@ export class TaskListComponent implements OnInit {
   updatingNameError = '';
 
   creatingTask = false;
+  editingTask = false;
+
+  selectedTask?: Task;
 
   constructor(
     public taskListService: TaskListService,
@@ -212,6 +215,12 @@ export class TaskListComponent implements OnInit {
     this.creatingTask = true;
   }
 
+  onCloseTaskDialog() {
+    this.creatingTask = false;
+    this.editingTask = false;
+    this.selectedTask = undefined;
+  }
+
   disableAllButtons() {
     return this.deleting || this.movingThisList || this.updatingTaskList;
   }
@@ -236,10 +245,7 @@ export class TaskListComponent implements OnInit {
   }
 
   select(task: Task) {
-    this.onTaskSelect.emit(task);
-  }
-
-  onCancelTaskCreation() {
-    this.creatingTask = false;
+    this.editingTask = true;
+    this.selectedTask = task;
   }
 }

@@ -108,7 +108,9 @@ export class TaskComponent implements OnInit {
         })
         .catch((error) => {
           console.log('error', error);
-          this.errorMessage = error.error.message;
+          this.errorMessage = error.error.message
+            ? error.error.message
+            : error.error;
         })
         .finally(() => {
           this.saving = false;
