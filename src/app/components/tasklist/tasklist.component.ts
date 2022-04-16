@@ -44,6 +44,9 @@ export class TaskListComponent implements OnInit {
   updatingNameError = '';
 
   creatingTask = false;
+  editingTask = false;
+
+  selectedTask?: Task;
 
   constructor(
     public taskListService: TaskListService,
@@ -72,6 +75,20 @@ export class TaskListComponent implements OnInit {
         clearInterval(interval);
       }
     }, 50);
+  }
+
+  onTaskUpdate(task: Task) {
+    console.log('on update Tasl:', task);
+    if (this.taskList && this.taskList.tasks) {
+      let taskIndex = this.taskList.tasks.findIndex(
+        (oldTask) => oldTask.id == task.id
+      );
+      this.taskList.tasks.splice(taskIndex);
+      this.taskList.tasks.push(task);
+      this.taskList.tasks = this.taskList.tasks.sort(
+        (a, b) => a.priority! - b.priority!
+      );
+    }
   }
 
   moveTaskList(taskList: TaskList, amount: number) {
@@ -212,6 +229,12 @@ export class TaskListComponent implements OnInit {
     this.creatingTask = true;
   }
 
+  onCloseTaskDialog() {
+    this.creatingTask = false;
+    this.editingTask = false;
+    this.selectedTask = undefined;
+  }
+
   disableAllButtons() {
     return this.deleting || this.movingThisList || this.updatingTaskList;
   }
@@ -236,10 +259,7 @@ export class TaskListComponent implements OnInit {
   }
 
   select(task: Task) {
-    this.onTaskSelect.emit(task);
-  }
-
-  onCancelTaskCreation() {
-    this.creatingTask = false;
+    this.editingTask = true;
+    this.selectedTask = task;
   }
 }

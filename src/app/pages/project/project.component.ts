@@ -5,7 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Project } from 'src/app/objects/project';
 import { Task } from 'src/app/objects/task';
 import { TaskList } from 'src/app/objects/tasklist';
@@ -39,7 +39,8 @@ export class ProjectComponent implements OnInit {
     private userService: UserService,
     private taskListService: TaskListService,
     private teamService: TeamService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -113,7 +114,9 @@ export class ProjectComponent implements OnInit {
   onListDelete(taskList: TaskList) {}
 
   // TODO: goes to a floating page to invite others
-  inviteMember() {}
+  manageProject() {
+    this.router.navigateByUrl("/project/" + this.project?.id + "/manageProject");
+  }
 
   addList() {
     this.addListView = true;

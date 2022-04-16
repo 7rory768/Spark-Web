@@ -53,6 +53,7 @@ import { TreeModule } from 'primeng/tree';
 import { DragDropModule } from 'primeng/dragdrop';
 import { CreateTeamComponent } from './pages/createTeam/createTeam.component';
 import { CalendarModule } from 'primeng/calendar';
+import { ManageProjectComponent } from './pages/manage-project/manage-project.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { CalendarModule } from 'primeng/calendar';
     CreateProjectComponent,
     HomepageComponent,
     CreateTeamComponent,
+    ManageProjectComponent,
   ],
   imports: [
     BrowserModule,

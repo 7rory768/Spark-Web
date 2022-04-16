@@ -1,6 +1,10 @@
+import { ChecklistItem } from './checklistItem';
+
 export interface Checklist {
   id: number;
   taskId: number;
   title: string;
-  completed: boolean;
+  items?: ChecklistItem[];
+  editingTitle?: boolean;
+  oldTitle?: string;
 }

@@ -7,14 +7,13 @@
 
 <p-dialog
   [(visible)]="task"
-  header="{{ task?.name }}"
   [style]="{ width: '40vw', height: '80vw', color: 'black' }"
   (onHide)="onHide.emit()"
   [modal]="true"
 >
   <ng-template pTemplate="header">
     <div
-      *ngIf="creatingTask && task"
+      *ngIf="creatingTask && editTask"
       class="w-full"
       style="margin-right: 0.5rem"
     >
@@ -22,12 +21,12 @@
         pInputText
         type="text"
         class="w-full"
-        [(ngModel)]="task.name"
+        [(ngModel)]="editTask.name"
         placeholder="Task Name"
       />
     </div>
-    <div *ngIf="!creatingTask && task">
-      <h2>{{ task.name }}</h2>
+    <div *ngIf="!creatingTask && editTask">
+      <h2>{{ editTask.name }}</h2>
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
@@ -36,15 +35,16 @@
       label="{{ creatingTask ? 'Create' : 'Save' }}"
       icon="pi {{ creatingTask ? 'pi-check' : 'pi-save' }}"
       [loading]="saving"
+      [disabled]="saving"
       (click)="creatingTask ? createTask() : saveTask()"
     ></button>
   </ng-template>
-  <div *ngIf="task">
+  <div *ngIf="editTask">
     <!-- DESCRIPTION -->
     <label>Description</label>
     <textarea
       pInputTextarea
-      [(ngModel)]="task.description"
+      [(ngModel)]="editTask.description"
       style="min-height: 4rem"
       placeholder="Description here"
       [autoResize]="true"
@@ -56,7 +56,7 @@
     <label style="margin-top: 2rem">Assigned Users</label>
     <p-multiSelect
       [options]="teamUsers"
-      [(ngModel)]="task.assignedUsers"
+      [(ngModel)]="editTask.assignedUsers"
       optionLabel="fullName"
       optionValue="user"
       [dropdownIcon]="
@@ -68,10 +68,10 @@
     <!-- ASSIGNED USERS AVATARS -->
     <p-avatarGroup
       class="flex align-content-center mr-3"
-      style="margin-top: 0.5rem"
+      [style]="{ 'margin-top': '0.5rem' }"
     >
       <p-avatar
-        *ngFor="let user of task.assignedUsers"
+        *ngFor="let user of editTask.assignedUsers"
         label="{{ getInitials(user) }}"
         shape="circle"
         color="bg-blue-500"
@@ -85,7 +85,7 @@
             <label class="w-full">Completion Points</label>
           </span>
           <p-inputNumber
-            [(ngModel)]="task.completionPoints"
+            [(ngModel)]="editTask.completionPoints"
             [min]="0"
             [showButtons]="true"
           ></p-inputNumber>
@@ -97,7 +97,7 @@
             <label class="w-full">Deadline</label>
           </div>
           <p-calendar
-            [(ngModel)]="task.deadline"
+            [(ngModel)]="editTask.deadline"
             [showButtonBar]="true"
             [showIcon]="true"
             [disabled]="!isManager()"
@@ -109,20 +109,131 @@
     <div></div>
     <div *ngIf="!creatingTask">
       <!-- CHECKLISTS -->
-      <h3>Checklist 1</h3>
-      <p-checkbox
-        class="w-full"
-        name="groupname"
-        value="Complete Frontend"
-        label="Complete Frontend"
-      ></p-checkbox>
-      <p-checkbox
-        class="w-full"
-        name="groupname"
-        value="Complete Frontend"
-        label="Complete Backend"
-        >Complete Backend
-      </p-checkbox>
+      <div style="margin-top: 1rem">
+        <!-- NEW CHECKLIST -->
+        <div class="flex">
+          <div style="width: 33%">
+            <button
+              pButton
+              class="p-button-outlined"
+              label="New Checklist"
+              icon="pi pi-plus"
+              (click)="createChecklist()"
+            ></button>
+          </div>
+          <div class="margin-left: 1rem">
+            <span *ngIf="newChecklist" class="p-inputgroup">
+              <input
+                pInputText
+                type="text"
+                [(ngModel)]="newChecklist.title"
+                placeholder="Checklist Title"
+              />
+              <button
+                type="button"
+                pButton
+                pRipple
+                icon="pi pi-check"
+                styleClass="p-button-success"
+                (click)="confirmNewChecklist()"
+              ></button>
+            </span>
+          </div>
+        </div>
+        <!-- EXISTING CHECKLISTS -->
+        <div *ngFor="let checklist of editTask.checklists">
+          <!-- CHECKLIST TITLE -->
+          <h3
+            *ngIf="!checklist.editingTitle"
+            (click)="
+              checklist.oldTitle = checklist.title;
+              checklist.editingTitle = true
+            "
+            class="checklist-title"
+          >
+            {{ checklist.title }}
+          </h3>
+          <!-- CHECKLIST TITLE - EDIT MODE -->
+          <span *ngIf="checklist.editingTitle" class="p-inputgroup">
+            <input
+              pInputText
+              [(ngModel)]="checklist.title"
+              placeholder="{{ checklist.oldTitle }}"
+            />
+            <button
+              type="button"
+              pButton
+              pRipple
+              icon="pi pi-check"
+              styleClass="p-button-success"
+              (click)="checklist.editingTitle = false"
+            ></button>
+          </span>
+          <!-- ADD ITEM BUTTON -->
+          <button
+            type="button"
+            pButton
+            pRipple
+            label="Add Item"
+            class="p-button-outlined"
+            style="margin-bottom: 0.5rem"
+            (click)="
+              checklist.items?.push({
+                id: -1,
+                checklistId: checklist.id,
+                description: 'Checklist Item ' + (checklist.items?.length! + 1),
+                completed: false
+              })
+            "
+          ></button>
+          <!-- CHECKLIST ITEMS -->
+          <div
+            class="flex justify-content-start"
+            *ngFor="let item of checklist.items"
+          >
+            <button
+              pButton
+              pRipple
+              icon="pi pi-times"
+              class="justify-self-end p-button-danger p-button-text"
+              (click)="deleteChecklistItem(checklist, item)"
+            ></button>
+            <p-checkbox
+              [(ngModel)]="item.completed"
+              [binary]="true"
+              class="w-full checklist-item"
+              name="groupname"
+            >
+            </p-checkbox>
+            <p
+              *ngIf="!item.editing"
+              (click)="
+                item.oldDescription = item.description; item.editing = true
+              "
+            >
+              {{ item.description }}
+            </p>
+            <textarea
+              *ngIf="item.editing"
+              pInputTextarea
+              [(ngModel)]="item.description"
+              style="min-height: 4rem"
+              placeholder="Description here"
+              [autoResize]="true"
+              class="w-full"
+              [rows]="2"
+              [cols]="30"
+            ></textarea>
+            <button
+              *ngIf="item.editing"
+              pButton
+              pRipple
+              icon="pi pi-check"
+              (click)="item.editing = false"
+            ></button>
+          </div>
+        </div>
+      </div>
       <h3>Comments</h3>
       <div class="flex">
         <div class="flex">

@@ -1,7 +1,8 @@
 export interface ChecklistItem {
-    id: number;
-    taskId: number;
-    title: string;
-    completed: boolean;
-  }
-  
+  id: number;
+  checklistId: number;
+  description: string;
+  completed: boolean;
+  editing?: boolean;
+  oldDescription?: string;
+}

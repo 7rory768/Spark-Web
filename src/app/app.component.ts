@@ -29,8 +29,7 @@ export class AppComponent implements OnInit {
           val.urlAfterRedirects !== '/profile' &&
           val.urlAfterRedirects !== '/createTeam' &&
           val.urlAfterRedirects !== '/createProject' &&
-          val.urlAfterRedirects !== '/project/:project-id' &&
-          val.urlAfterRedirects !== '/project/:project-id/task/:task-id';
+          !val.urlAfterRedirects.startsWith("/project");
 
         var widthInterval = setInterval(() => {
           this.navWidth =

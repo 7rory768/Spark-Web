@@ -2,8 +2,7 @@
 
 <ng-container *ngIf="project && project.taskLists">
   <div class="project card h-full">
-    <div class="flex w-100 h-5rem"></div>
-    <div class="flex overflow-hidden flex-grow-1 flex-column h-full">
+    <div class="flex flex-grow-1 flex-column h-full">
       <div class="flex w-full align-content-center">
         <h2 class="mt-4" style="margin-right: 1rem">{{ project.name }}</h2>
         <p-avatarGroup class="flex align-content-center mr-3">
@@ -14,9 +13,9 @@
         <input
           pButton
           type="button"
-          value="Invite"
+          value="Manage Project"
           class="button pi pi-user"
-          (click)="inviteMember()"
+          (click)="manageProject()"
         />
       </div>
       <div>
@@ -28,7 +27,7 @@
           (click)="addList()"
         />
       </div>
-      <div class="flex flex-grow-1 flex-nowrap overflow-scroll h-full">
+      <div class="flex flex-grow-1 flex-nowrap h-full">
         <app-tasklist
           *ngIf="addListView"
           [taskList]="newList"
