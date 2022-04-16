@@ -113,6 +113,7 @@
     [project]="project"
     [taskList]="taskList"
     [creatingTask]="creatingTask"
+    (updatedTask)="onTaskUpdate($event)"
     [task]="creatingTask ? undefined : selectedTask"
     (onHide)="onCloseTaskDialog()"
   ></app-task>

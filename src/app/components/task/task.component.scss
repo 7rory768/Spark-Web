@@ -14,8 +14,29 @@ div::ng-deep {
   span.p-calendar {
     width: 100%;
   }
+
+  p-checkbox {
+    width: auto !important;
+    margin-right: 1rem;
+  }
 }
 
 label {
   font-weight: bold;
+}
+
+.checklist-title {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.clicklist-item {
+  cursor: pointer;
+  margin-bottom: 0.25rem;
+}
+
+div::ng-deep {
+  .p-checkbox {
+    width: auto !important;
+  }
 }

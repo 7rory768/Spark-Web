@@ -28,15 +28,7 @@ export class TaskService {
   }
 
   public updateTask(task: Task) {
-    let subject = new Subject<Task>();
-
-    this.http.post('tasks/update', task).subscribe({
-      next: (response: any) => {
-        subject.next(response.value);
-      },
-    });
-
-    return subject;
+    return firstValueFrom(this.http.post('tasks/update', task));
   }
 
   public assignUserToTask(task: Task | any, username: string) {

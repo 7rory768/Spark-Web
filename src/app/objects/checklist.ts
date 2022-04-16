@@ -5,4 +5,6 @@ export interface Checklist {
   taskId: number;
   title: string;
   items?: ChecklistItem[];
+  editingTitle?: boolean;
+  oldTitle?: string;
 }

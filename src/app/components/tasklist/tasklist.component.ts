@@ -77,6 +77,20 @@ export class TaskListComponent implements OnInit {
     }, 50);
   }
 
+  onTaskUpdate(task: Task) {
+    console.log('on update Tasl:', task);
+    if (this.taskList && this.taskList.tasks) {
+      let taskIndex = this.taskList.tasks.findIndex(
+        (oldTask) => oldTask.id == task.id
+      );
+      this.taskList.tasks.splice(taskIndex);
+      this.taskList.tasks.push(task);
+      this.taskList.tasks = this.taskList.tasks.sort(
+        (a, b) => a.priority! - b.priority!
+      );
+    }
+  }
+
   moveTaskList(taskList: TaskList, amount: number) {
     if (this.movingThisList) return;
 
