@@ -139,6 +139,7 @@
       <!-- CHECKLISTS -->
       <div style="margin-top: 1rem">
         <!-- NEW CHECKLIST -->
+        <h4 style="margin-bottom: 0.5rem">Checklists</h4>
         <div class="flex">
           <div style="width: 33%">
             <button
@@ -171,32 +172,44 @@
         <!-- EXISTING CHECKLISTS -->
         <div *ngFor="let checklist of editTask.checklists">
           <!-- CHECKLIST TITLE -->
-          <h3
-            *ngIf="!checklist.editingTitle"
-            (click)="
-              checklist.oldTitle = checklist.title;
-              checklist.editingTitle = true
-            "
-            class="checklist-title"
-          >
-            {{ checklist.title }}
-          </h3>
-          <!-- CHECKLIST TITLE - EDIT MODE -->
-          <span *ngIf="checklist.editingTitle" class="p-inputgroup">
-            <input
-              pInputText
-              [(ngModel)]="checklist.title"
-              placeholder="{{ checklist.oldTitle }}"
-            />
+          <div class="flex">
+            <h4
+              *ngIf="!checklist.editingTitle"
+              (click)="
+                checklist.oldTitle = checklist.title;
+                checklist.editingTitle = true
+              "
+              class="checklist-title"
+            >
+              {{ checklist.title }}
+            </h4>
+            <!-- CHECKLIST TITLE - EDIT MODE -->
+            <span *ngIf="checklist.editingTitle" class="p-inputgroup">
+              <input
+                pInputText
+                [(ngModel)]="checklist.title"
+                placeholder="{{ checklist.oldTitle }}"
+                style="margin-top: 1rem"
+              />
+              <button
+                type="button"
+                pButton
+                pRipple
+                icon="pi pi-check"
+                styleClass="p-button-success"
+                style="margin-top: 1rem"
+                (click)="checklist.editingTitle = false"
+              ></button>
+            </span>
             <button
-              type="button"
               pButton
               pRipple
-              icon="pi pi-check"
-              styleClass="p-button-success"
-              (click)="checklist.editingTitle = false"
+              icon="pi pi-times"
+              class="justify-self-end p-button-danger p-button-text"
+              (click)="deleteChecklist(checklist)"
+              style="padding: 0; padding-top: 0.75rem"
             ></button>
-          </span>
+          </div>
           <!-- ADD ITEM BUTTON -->
           <button
             type="button"
@@ -265,7 +278,7 @@
       <h3>Comments</h3>
       <div class="flex">
         <div class="flex">
-          <p-avatar label="RS" shape="circle"></p-avatar>
+          <p-avatar label="{{ getInitials(user!) }}" shape="circle"></p-avatar>
         </div>
         <div class="flex flex-grow-1">
           <input

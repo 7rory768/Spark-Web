@@ -253,11 +253,19 @@ export class TaskComponent implements OnInit {
     }
   }
 
+  deleteChecklist(checklist: Checklist) {
+    if (this.editTask && this.editTask.checklists) {
+      this.editTask.checklists.splice(
+        this.editTask.checklists.indexOf(checklist),
+        1
+      );
+    }
+  }
+
   deleteChecklistItem(checklist: Checklist, item: ChecklistItem) {
-    checklist.items?.splice(
-      checklist.items.findIndex((otherItem) => otherItem.id === item.id),
-      1
-    );
+    if (checklist.items) {
+      checklist.items?.splice(checklist.items?.indexOf(item), 1);
+    }
   }
 
   confirmError() {
