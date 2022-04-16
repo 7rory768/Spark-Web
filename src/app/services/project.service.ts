@@ -89,6 +89,23 @@ export class ProjectService {
       });
     return subject;
   }
+
+  attemptUpdateProject(
+    teamId: number,
+    name: string,
+    budget: number
+  ){
+    let subject = new Subject<Project>();
+
+    this.http
+      .post('projects/update', { teamId, name, budget })
+      .subscribe({
+        next: (response: any) => {
+          subject.next(response.value);
+        },
+      });
+    return subject;
+  }
 }
 
 export enum RegisterResponse {

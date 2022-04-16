@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
+import { Subject } from 'rxjs';
 import { Project } from 'src/app/objects/project';
 import { Team } from 'src/app/objects/team';
 import { ProjectService } from 'src/app/services/project.service';
@@ -31,10 +32,11 @@ export class ManageProjectComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
-    private teamService: TeamService, 
+    private teamService: TeamService,
     private projectService: ProjectService,
   ) { }
 
+  // get the project 
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (params: ParamMap) => {
@@ -60,18 +62,22 @@ export class ManageProjectComponent implements OnInit {
     });
   }
 
+  // get teams
   onLoadedProject() {
     this.teamService.attemptGetAll().subscribe({
       next: (result: Team[]) => {
         this.project!.team = result.find(
           (team) => team.id === this.project!.teamId
         );
+        this.teams = result;
       },
     });
   }
 
   checkInput() {
-    if (this.projectName == '') {
+    console.log("Project name: ", this.projectName);
+
+    if (this.projectName.length == 0) {
       this.warningMsg = "Project name empty. Please fill in the feild.";
     }
     if (this.projectName.length > 20) {
@@ -88,16 +94,27 @@ export class ManageProjectComponent implements OnInit {
 
   // // TODO: add this info in the database and a new project will appear on the projects page.
   save() {
-
+    // let subject = new Subject<Project>();
+    this.projectService.attemptUpdateProject(this.teamName!.id, this.projectName, Number(this.budget)).subscribe({
+      next: (result: Project) => {
+        if (result != null) {
+          this.warningMsg = "Failure to save changes..."
+        }
+        else {
+          this.warningMsg = "Changes Saved!"
+          this.project = result;
+        }
+      },
+    });
   }
 
-  delete(){
+  delete() {
     this.displayConfirm = false;
     // delete from database
     this.router.navigateByUrl('/project');
   }
 
-  showConfirmation(){
+  showConfirmation() {
     this.displayConfirm = true;
   }
 }
