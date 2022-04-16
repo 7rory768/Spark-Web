@@ -5,13 +5,13 @@
   }
 }
 
-input[type=text] {
+input[type="text"] {
   width: 20%;
   padding: 5px 20px;
   margin-right: 20px;
   box-sizing: border-box;
-  background-color: #0B6DA5;
-  border: #3BAFF0;
+  background-color: #0b6da5;
+  border: #3baff0;
   color: white;
 
   -webkit-transition: 0.5s;
@@ -19,10 +19,17 @@ input[type=text] {
   outline: none;
 }
 
-input[type=text]:focus {
-  border: 1px solid #3BAFF0;
+input[type="text"]:focus {
+  border: 1px solid #3baff0;
 }
 
-input[type=text]::placeholder {
-  color: #FFFFFF;
+input[type="text"]::placeholder {
+  color: #ffffff;
+}
+
+.app-div {
+  min-height: calc(100vh - 4rem);
+  height: calc(100vh - 4rem);
+  max-height: calc(100vh - 4rem);
+  overflow: scroll;
 }

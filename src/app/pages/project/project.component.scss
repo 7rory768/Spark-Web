@@ -5,7 +5,6 @@ p-avatarGroup {
 }
 
 p-dialog ::ng-deep {
-
   h1,
   h2,
   h3,
@@ -25,12 +24,13 @@ p-dialog ::ng-deep {
 }
 
 .project {
-  background-color: rgba(59, 175, 240, 0.20);
+  background-color: rgba(59, 175, 240, 0.2);
+  padding: 1rem;
 }
 
 .button {
-  border: 1px solid #2394D3;
-  background-color: #3BAFF0;
+  border: 1px solid #2394d3;
+  background-color: #3baff0;
   box-sizing: border-box;
   margin-bottom: 20px;
   height: 38px;
@@ -44,6 +44,6 @@ p-dialog ::ng-deep {
 }
 
 .button:active {
-  background-color: #2394D3;
+  background-color: #2394d3;
   transform: translateY(2px);
 }
