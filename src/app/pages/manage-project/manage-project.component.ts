@@ -95,14 +95,14 @@ export class ManageProjectComponent implements OnInit {
   // // TODO: add this info in the database and a new project will appear on the projects page.
   save() {
     // let subject = new Subject<Project>();
-    this.projectService.attemptUpdateProject(this.teamName!.id, this.projectName, Number(this.budget)).subscribe({
+    this.projectService.attemptUpdateProject(this.project!.id, this.teamName!.id, this.projectName, Number(this.budget)).subscribe({
       next: (result: Project) => {
         if (result != null) {
-          this.warningMsg = "Failure to save changes..."
+          this.warningMsg = "Changes Saved!"
+          this.ngOnInit();
         }
         else {
-          this.warningMsg = "Changes Saved!"
-          this.project = result;
+          this.warningMsg = "Failure to save changes..."
         }
       },
     });

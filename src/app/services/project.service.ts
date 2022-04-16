@@ -91,6 +91,7 @@ export class ProjectService {
   }
 
   attemptUpdateProject(
+    projectId: number,
     teamId: number,
     name: string,
     budget: number
@@ -98,7 +99,7 @@ export class ProjectService {
     let subject = new Subject<Project>();
 
     this.http
-      .post('projects/update', { teamId, name, budget })
+      .post('projects/update', { projectId, teamId, name, budget })
       .subscribe({
         next: (response: any) => {
           subject.next(response.value);
