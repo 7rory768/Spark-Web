@@ -14,6 +14,7 @@ export class User implements UserInterface {
   email: string = '';
   password: string = '';
   dateCreated: Date = new Date();
+  pointsOnTeam?: number;
 
   public static getInitials(user: User) {
     return (user.fName.charAt(0) + user.lName.charAt(0)).toUpperCase();

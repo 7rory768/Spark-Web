@@ -78,15 +78,7 @@ export class TaskService {
   }
 
   public deleteTask(task: Task) {
-    let subject = new Subject<boolean>();
-
-    this.http.delete('tasks/' + task.id).subscribe({
-      next: (response: any) => {
-        subject.next(response.state);
-      },
-    });
-
-    return subject;
+    return firstValueFrom(this.http.post('tasks/delete', task));
   }
 
   public isTaskList(taskList: TaskList | number): taskList is TaskList {

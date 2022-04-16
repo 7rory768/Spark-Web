@@ -6,7 +6,7 @@ import { HttpService } from './http.service';
 import { Project } from '../objects/project';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeamService {
   private cacheList: Team[] = [];
@@ -22,7 +22,7 @@ export class TeamService {
   }
 
   uncache(team: Team) {
-    this.cacheList.splice(this.cacheList.indexOf(team));
+    this.cacheList.splice(this.cacheList.indexOf(team), 1);
   }
 
   getFromCache(id: number): Team | undefined {
@@ -46,7 +46,7 @@ export class TeamService {
       //   console.log('error', error);
       //   return error;
       // },
-      complete: () => { },
+      complete: () => {},
     });
     return subject;
   }
@@ -102,10 +102,10 @@ export class TeamService {
     return subject;
   }
 
-  attemptAddMembers(id: number, selectedMembers: string): Subject<boolean> {
+  attemptAddMembers(id: number, username: string): Subject<boolean> {
     let subject = new Subject<boolean>();
 
-    this.http.post('teams/addMember', { id, selectedMembers }).subscribe({
+    this.http.post('teams/addMember', { id, username }).subscribe({
       next: (response: any) => {
         // if ((response.message == CreateResponse.Valid)) {
         //   this.team = response.value;

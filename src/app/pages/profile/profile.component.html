@@ -1,77 +1,147 @@
 <div class="profile">
-    <div class="profile-nav flex w-100 h-15rem text-center">
-        <img src="../../../assets/images/avatar-pic.png" alt="avatar" class="avatar">
-        <div class="flex-wrap text">
-            <div class="text-white">
-                <h1>{{fName}} {{lName}}</h1>
-            </div>
-            <h3>@{{username}}</h3>
-            <h3>Total Points: XXXX</h3>
-        </div>
+  <div class="profile-nav flex w-100 h-15rem text-center">
+    <img
+      src="../../../assets/images/avatar-pic.png"
+      alt="avatar"
+      class="avatar"
+    />
+    <div class="flex-wrap text">
+      <div class="text-white">
+        <h1>{{ fName }} {{ lName }}</h1>
+      </div>
+      <h3>@{{ username }}</h3>
+      <i *ngIf="!points" class="pi pi-spin pi-spinner"></i>
+      <h3 *ngIf="points">Total Points: {{ points }}</h3>
+    </div>
+  </div>
+
+  <div class="flex align-content-center justify-content-center">
+    <div class="pad p-4 shadow-2 border-round surface-card">
+      <div class="text-center mb-5">
+        <div class="header">Manage Profile</div>
+      </div>
+
+      <form>
+        <label class="w-full" for="username">Username</label>
+        <input
+          pInputText
+          [disabled]="true"
+          class="w-full"
+          [(ngModel)]="username"
+          name="username"
+          type="text"
+          placeholder="{{ username }}"
+        />
+      </form>
+      <form>
+        <label class="w-full" for="fName">First Name</label>
+        <input
+          pInputText
+          class="w-full"
+          [(ngModel)]="fName"
+          name="fName"
+          type="text"
+          placeholder="{{ fName }}"
+        />
+      </form>
+      <form>
+        <label class="w-full" for="lName">Last Name</label>
+        <input
+          pInputText
+          class="w-full"
+          [(ngModel)]="lName"
+          name="lName"
+          type="text"
+          placeholder="{{ lName }}"
+        />
+      </form>
+      <form>
+        <label class="w-full" for="email">Email</label>
+        <input
+          pInputText
+          class="w-full"
+          [(ngModel)]="email"
+          name="email"
+          type="email"
+          placeholder="{{ email }}"
+        />
+      </form>
+      <form>
+        <label class="w-full" for="password">New Password</label>
+        <p-password
+          class="w-full"
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          [feedback]="true"
+          [toggleMask]="true"
+        ></p-password>
+      </form>
+      <div class="text-center">
+        <input
+          pButton
+          type="button"
+          value="Save Changes"
+          class="button"
+          (click)="save()"
+        />
+      </div>
     </div>
 
-    <div class="flex align-content-center justify-content-center">
-        <div class="pad p-4 shadow-2 border-round surface-card">
-            <div class="text-center mb-5">
-                <div class="header">Manage Profile</div>
-            </div>
+    <div class="pad p-4 shadow-2 border-round surface-card">
+      <div class="flex mb-5 header">
+        <div class="header">Teams</div>
+        <input
+          pButton
+          type="button"
+          value="+ Add Team"
+          class="button small"
+          (click)="createTeam()"
+        />
+      </div>
 
-            <form>
-                <label class="w-full" for="username">Username</label>
-                <input pInputText [disabled]="true" class="w-full" [(ngModel)]="username" name="username" type="text"
-                    placeholder={{username}} />
-            </form>
-            <form>
-                <label class="w-full" for="fName">First Name</label>
-                <input pInputText class="w-full" [(ngModel)]="fName" name="fName" type="text" placeholder={{fName}} />
-            </form>
-            <form>
-                <label class="w-full" for="lName">Last Name</label>
-                <input pInputText class="w-full" [(ngModel)]="lName" name="lName" type="text" placeholder={{lName}} />
-            </form>
-            <form>
-                <label class="w-full" for="email">Email</label>
-                <input pInputText class="w-full" [(ngModel)]="email" name="email" type="email" placeholder={{email}} />
-            </form>
-            <form>
-                <label class="w-full" for="password">New Password</label>
-                <p-password class="w-full" [(ngModel)]="password" name="password" type="password" [feedback]="false"
-                    [toggleMask]="true"></p-password>
-            </form>
-            <div class="text-center">
-                <input pButton type="button" value="Save Changes" class="button" (click)="save()" />
-            </div>
-        </div>
-
-        <div class="pad p-4 shadow-2 border-round surface-card">
-            <div class="flex mb-5 header">
-                <div class="header">Teams</div>
-                <input pButton type="button" value="+ Add Team" class="button small" (click)="createTeam()" />
-            </div>
-
-            <button *ngFor="let team of teams" class="box w-full mb-5 profile" (click)="showTeamDetail(team)">
-                <h3>{{ team.name }}</h3>
-                <h4>Team Manager: @{{ team.mgrUsername }}</h4>
-            </button>
-        </div>
+      <button
+        *ngFor="let team of teams"
+        class="box w-full mb-5 profile"
+        (click)="showTeamDetail(team)"
+      >
+        <h3>{{ team.name }}</h3>
+        <h4>Team Manager: @{{ team.mgrUsername }}</h4>
+      </button>
     </div>
+  </div>
 </div>
 
-<p-dialog header="{{ selectedTeam?.name }}" [(visible)]="displayModal" [modal]="true" [style]="{width: '15vw'}"
-    [draggable]="true" [resizable]="true">
-    <div class="mb-5">
-        <h4>Members</h4>
-        <h5 *ngFor="let teamMember of teamMembers" class="">- @{{ teamMember.username }} </h5>
-    </div>
-    <div>
-        <h4>Projects</h4>
-        <h5 *ngFor="let project of projects" class="">- {{ project.name }} </h5>
-    </div>
+<p-dialog
+  header="{{ selectedTeam?.name }}"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '15vw' }"
+  [draggable]="true"
+  [resizable]="true"
+>
+  <div class="mb-5">
+    <h4>Members</h4>
+    <p-progressSpinner *ngIf="loadingMembers"></p-progressSpinner>
+    <h5 *ngFor="let teamMember of teamMembers" class="">
+      - @{{ teamMember.username + " (" + teamMember.pointsOnTeam + " points)" }}
+    </h5>
+  </div>
+  <div>
+    <h4>Projects</h4>
+    <h5 *ngFor="let project of projects" class="">- {{ project.name }}</h5>
+  </div>
 
-    <ng-template pTemplate="footer">
-        <div class="flex">
-            <!-- <input pButton type="button" value="Edit Team" class="button" (click)="editTeam()" /> -->
-            <input pButton type="button" value="Delete Team" class="button" (click)="deleteTeam()" />
-        </div>
-    </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="flex">
+      <!-- <input pButton type="button" value="Edit Team" class="button" (click)="editTeam()" /> -->
+      <input
+        pButton
+        type="button"
+        value="Delete Team"
+        class="button"
+        (click)="deleteTeam()"
+      />
+    </div>
+  </ng-template>
 </p-dialog>

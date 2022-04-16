@@ -46,6 +46,7 @@ export class TaskComponent implements OnInit {
   teamUsers: UserOption[] = [];
 
   saving = false;
+  deleting = false;
   errorMessage = '';
 
   newChecklist?: Checklist;
@@ -110,16 +111,19 @@ export class TaskComponent implements OnInit {
           if (response.state) {
             this.task = response.value;
             this.editTask = cloneDeep(this.task);
+
             if (this.task && this.taskList && this.taskList.tasks) {
               let taskIndex = this.taskList.tasks.findIndex(
                 (otherTask) => otherTask.id === this.task?.id
               );
-              this.taskList.tasks.splice(taskIndex);
+              this.taskList.tasks.splice(taskIndex, 1);
               this.taskList.tasks.push(this.task);
               this.taskList.tasks = this.taskList.tasks.sort(
                 (a, b) => a.priority! - b.priority!
               );
             }
+
+            this.creatingTask = false;
           } else {
             this.errorMessage = response.message;
           }
@@ -143,7 +147,9 @@ export class TaskComponent implements OnInit {
       this.newChecklist = {
         id: -1,
         taskId: this.editTask.id,
-        title: 'New Checklist',
+        title:
+          'New Checklist ' +
+          (this.editTask.checklists ? this.editTask.checklists?.length + 1 : 1),
         items: [],
       };
     }
@@ -178,6 +184,57 @@ export class TaskComponent implements OnInit {
             this.updatedTask.emit(this.task);
             this.editTask = cloneDeep(this.task);
             this.creatingTask = false;
+          } else {
+            this.errorMessage = response.message;
+          }
+        })
+        .catch((error) => {
+          console.log('error', error);
+          this.errorMessage = error.error.message
+            ? error.error.message
+            : error.error;
+        })
+        .finally(() => {
+          this.saving = false;
+          if (this.errorMessage && this.errorMessage !== '')
+            this.confirmError();
+        });
+    }
+  }
+
+  deleteTask() {
+    if (this.editTask) {
+      this.deleting = true;
+      this.errorMessage = '';
+
+      let priority = this.editTask.priority!;
+
+      this.taskService
+        .deleteTask(this.editTask)
+        .then((response: any) => {
+          console.log('response', response);
+          if (response.state) {
+            if (this.taskList && this.taskList.tasks) {
+              this.taskList.tasks.splice(
+                this.taskList.tasks.findIndex(
+                  (old) => old.id === this.editTask?.id
+                ),
+                1
+              );
+
+              for (let otherList of this.taskList.tasks) {
+                if (otherList.priority! > priority) {
+                  otherList.priority!--;
+                }
+              }
+
+              this.taskList.tasks = this.taskList.tasks.sort((a, b) => {
+                return a.priority! - b.priority!;
+              });
+            }
+
+            this.deleting = false;
+            this.task = undefined;
           } else {
             this.errorMessage = response.message;
           }

@@ -20,7 +20,7 @@ export class ProjectService {
   }
 
   uncache(project: Project) {
-    this.cacheList.splice(this.cacheList.indexOf(project));
+    this.cacheList.splice(this.cacheList.indexOf(project), 1);
   }
 
   getFromCache(projectId: number): Project | undefined {
@@ -28,7 +28,7 @@ export class ProjectService {
     return this.cacheList.find((project) => project.id == projectId);
   }
 
-  getCacheList(){
+  getCacheList() {
     return this.cacheList;
   }
   attemptGetAll(): Subject<Project[]> {
@@ -73,20 +73,14 @@ export class ProjectService {
     return subject;
   }
 
-  attemptCreateProject(
-    teamId: number,
-    name: string,
-    budget: number,
-  ) {
+  attemptCreateProject(teamId: number, name: string, budget: number) {
     let subject = new Subject<Project>();
 
-    this.http
-      .post('projects/create', { teamId, name, budget })
-      .subscribe({
-        next: (response: any) => {
-          subject.next(response.value);
-        },
-      });
+    this.http.post('projects/create', { teamId, name, budget }).subscribe({
+      next: (response: any) => {
+        subject.next(response.value);
+      },
+    });
     return subject;
   }
 
@@ -95,7 +89,7 @@ export class ProjectService {
     teamId: number,
     name: string,
     budget: number
-  ){
+  ) {
     let subject = new Subject<Project>();
 
     this.http
@@ -107,19 +101,14 @@ export class ProjectService {
       });
     return subject;
   }
-  attemptDelete(
-    projectId: number,
-    teamId: number,
-  ){
+  attemptDelete(projectId: number, teamId: number) {
     let subject = new Subject<Boolean>();
 
-    this.http
-      .post('projects/delete', { projectId, teamId})
-      .subscribe({
-        next: (response: any) => {
-          subject.next(response.value);
-        },
-      });
+    this.http.post('projects/delete', { projectId, teamId }).subscribe({
+      next: (response: any) => {
+        subject.next(response.value);
+      },
+    });
     return subject;
   }
 }

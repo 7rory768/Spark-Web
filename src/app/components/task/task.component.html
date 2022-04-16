@@ -13,29 +13,57 @@
 >
   <ng-template pTemplate="header">
     <div
-      *ngIf="creatingTask && editTask"
+      *ngIf="editTask && (editTask.editingName || creatingTask)"
       class="w-full"
       style="margin-right: 0.5rem"
     >
-      <input
-        pInputText
-        type="text"
-        class="w-full"
-        [(ngModel)]="editTask.name"
-        placeholder="Task Name"
-      />
+      <span class="p-inputgroup">
+        <input
+          pInputText
+          type="text"
+          class="w-full"
+          [(ngModel)]="editTask.name"
+          placeholder="Task Name"
+        />
+        <button
+          *ngIf="editTask.editingName"
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-check"
+          styleClass="p-button-success"
+          (click)="editTask.editingName = false"
+        ></button>
+      </span>
     </div>
-    <div *ngIf="!creatingTask && editTask">
+    <div
+      *ngIf="!creatingTask && editTask && !editTask.editingName"
+      (click)="editTask.editingName = true"
+      style="cursor: pointer"
+    >
       <h2>{{ editTask.name }}</h2>
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
     <button
+      *ngIf="!creatingTask"
       pButton
+      pRipple
+      class="p-button-danger"
+      label="Delete"
+      icon="pi pi-times"
+      [loading]="deleting"
+      [disabled]="saving || deleting"
+      (click)="deleteTask()"
+      style="margin-right: 0.5rem"
+    ></button>
+    <button
+      pButton
+      pRipple
       label="{{ creatingTask ? 'Create' : 'Save' }}"
       icon="pi {{ creatingTask ? 'pi-check' : 'pi-save' }}"
       [loading]="saving"
-      [disabled]="saving"
+      [disabled]="saving || deleting"
       (click)="creatingTask ? createTask() : saveTask()"
     ></button>
   </ng-template>

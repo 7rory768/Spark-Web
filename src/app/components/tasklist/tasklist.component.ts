@@ -66,6 +66,8 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     let interval = setInterval(() => {
       if (this.taskList) {
+        console.log('taskList', this.taskList);
+
         this.taskService.getTasks(this.taskList).subscribe({
           next: (tasks: Task[]) => {
             this.taskList!.tasks = tasks;
@@ -78,12 +80,11 @@ export class TaskListComponent implements OnInit {
   }
 
   onTaskUpdate(task: Task) {
-    console.log('on update Tasl:', task);
     if (this.taskList && this.taskList.tasks) {
       let taskIndex = this.taskList.tasks.findIndex(
         (oldTask) => oldTask.id == task.id
       );
-      this.taskList.tasks.splice(taskIndex);
+      this.taskList.tasks.splice(taskIndex, 1);
       this.taskList.tasks.push(task);
       this.taskList.tasks = this.taskList.tasks.sort(
         (a, b) => a.priority! - b.priority!
@@ -149,15 +150,18 @@ export class TaskListComponent implements OnInit {
         if (!success) return;
 
         if (this.project && this.project.taskLists) {
-          for (let otherList of this.project.taskLists!) {
+          this.project.taskLists.splice(
+            this.project.taskLists.findIndex(
+              (oldList) => oldList.id === taskList.id
+            ),
+            1
+          );
+
+          for (let otherList of this.project.taskLists) {
             if (otherList.position > position) {
               otherList.position--;
             }
           }
-
-          this.project.taskLists.splice(
-            this.project.taskLists.indexOf(taskList)
-          );
 
           this.project.taskLists = this.project.taskLists.sort((a, b) => {
             return a.position - b.position;
@@ -230,6 +234,7 @@ export class TaskListComponent implements OnInit {
   }
 
   onCloseTaskDialog() {
+    console.log('on close task dialog');
     this.creatingTask = false;
     this.editingTask = false;
     this.selectedTask = undefined;

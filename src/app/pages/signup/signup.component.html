@@ -1,42 +1,97 @@
-<div class="signup card h-screen">
-    <div class="flex align-content-center justify-content-center flex-wrap card-container h-full">
-        <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
-            <div class="text-center mb-5">
-                <img src="../../../assets/images/icon/sparkles-64.png" alt="Image" height="50" class="mb-3" />
-                <div class="text-900 text-3xl font-medium mb-3">Sign up with Spark</div>
-                <span class="text-600 font-medium line-height-3">Already have an account?</span>
-                <a href="/login" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Log In Now!</a>
-            </div>
+<div class="signup card h-full">
+  <div
+    class="flex align-content-center justify-content-center flex-wrap card-container h-full"
+  >
+    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+      <div class="text-center mb-5">
+        <img
+          src="../../../assets/images/icon/sparkles-64.png"
+          alt="Image"
+          height="50"
+          class="mb-3"
+        />
+        <div class="text-900 text-3xl font-medium mb-3">Sign up with Spark</div>
+        <span class="text-600 font-medium line-height-3"
+          >Already have an account?</span
+        >
+        <a
+          href="/login"
+          class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+          >Log In Now!</a
+        >
+      </div>
 
-            <form>
-                <label class="w-full" for="fName">First Name</label>
-                <input pInputText class="w-full" [(ngModel)]="fName" name="fName" type="text" />
-            </form>
-            <form>
-                <label class="w-full" for="lName">Last Name</label>
-                <input pInputText class="w-full" [(ngModel)]="lName" name="lName" type="text" />
-            </form>
-            <form>
-                <label class="w-full" for="email">Email</label>
-                <input pInputText class="w-full" [(ngModel)]="email" name="email" type="email"/>
-            </form>
-            <form>
-                <label class="w-full" for="username">Username</label>
-                <input pInputText class="w-full" [(ngModel)]="username" name="username" type="text"/>
-            </form>
-            <form>
-                <label class="w-full" for="password">Password</label>
-                <p-password class="w-full" [(ngModel)]="password" name="password" type="password" [feedback]="false"
-                    [toggleMask]="true"></p-password>
-            </form>
-            <form>
-                <label class="w-full" for="confirmedPassword">Confirm Password</label>
-                <p-password class="w-full" [(ngModel)]="confirmPassword" name="confirmedPassword" type="password"
-                    [feedback]="false" [toggleMask]="true"></p-password>
-            </form>
-            <div class="text-center">
-                <input pButton type="button" value="Sign Up" class="button" (click)="signUp()" />
-            </div>
-        </div>
+      <form>
+        <label class="w-full" for="fName">First Name</label>
+        <input
+          pInputText
+          class="w-full"
+          [(ngModel)]="fName"
+          name="fName"
+          type="text"
+        />
+      </form>
+      <form>
+        <label class="w-full" for="lName">Last Name</label>
+        <input
+          pInputText
+          class="w-full"
+          [(ngModel)]="lName"
+          name="lName"
+          type="text"
+        />
+      </form>
+      <form>
+        <label class="w-full" for="email">Email</label>
+        <input
+          pInputText
+          class="w-full"
+          [(ngModel)]="email"
+          name="email"
+          type="email"
+        />
+      </form>
+      <form>
+        <label class="w-full" for="username">Username</label>
+        <input
+          pInputText
+          class="w-full"
+          [(ngModel)]="username"
+          name="username"
+          type="text"
+        />
+      </form>
+      <form>
+        <label class="w-full" for="password">Password</label>
+        <p-password
+          class="w-full"
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          [feedback]="false"
+          [toggleMask]="true"
+        ></p-password>
+      </form>
+      <form>
+        <label class="w-full" for="confirmedPassword">Confirm Password</label>
+        <p-password
+          class="w-full"
+          [(ngModel)]="confirmPassword"
+          name="confirmedPassword"
+          type="password"
+          [feedback]="false"
+          [toggleMask]="true"
+        ></p-password>
+      </form>
+      <div class="text-center">
+        <input
+          pButton
+          type="button"
+          value="Sign Up"
+          class="button"
+          (click)="signUp()"
+        />
+      </div>
     </div>
+  </div>
 </div>

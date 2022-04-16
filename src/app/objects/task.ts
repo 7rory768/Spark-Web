@@ -15,4 +15,5 @@ export interface Task {
   completionPoints?: number;
   checklists?: Checklist[];
   assignedUsers?: User[];
+  editingName?: boolean;
 }

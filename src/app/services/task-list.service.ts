@@ -51,7 +51,8 @@ export class TaskListService {
       next: (response: any) => {
         subject.next(response.value);
         this.isMovingTaskLists.splice(
-          this.isMovingTaskLists.indexOf(taskList.projectId)
+          this.isMovingTaskLists.indexOf(taskList.projectId),
+          1
         );
       },
       error: (response) => {
@@ -69,7 +70,7 @@ export class TaskListService {
   public deleteTaskList(taskList: TaskList) {
     let subject = new Subject<boolean>();
 
-    this.http.delete('lists/' + taskList.id).subscribe({
+    this.http.post('lists/delete', taskList).subscribe({
       next: (response: any) => {
         subject.next(response.state);
       },
